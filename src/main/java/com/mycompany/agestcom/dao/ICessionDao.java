@@ -12,7 +12,7 @@ import com.mycompany.agestcom.data.Cession;
  *
  * @author root
  */
-public interface ICessionDao extends IDao<Cession, Long>{
+public interface ICessionDao extends  IDao<Cession, Long>{
      //public Cession findByDescription(String description) throws DataAccessException;
 
     
