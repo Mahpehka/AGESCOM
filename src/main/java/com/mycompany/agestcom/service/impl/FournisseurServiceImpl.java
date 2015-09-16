@@ -10,6 +10,7 @@ import com.mycompany.agestcom.dao.IFournisseurDao;
 import com.mycompany.agestcom.data.Fournisseur;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class FournisseurServiceImpl implements IFournisseurDao{
+     @Autowired
         private IFournisseurDao iFournisseurDao;
 
     public IFournisseurDao getiFournisseurDao() {

@@ -14,6 +14,6 @@ import java.io.Serializable;
  *
  * @author root
  */
-public class Fiche_detenteurDaoImpl extends GenericDao<Fiche_detenteur, Long>{
+public class Fiche_detenteurDaoImpl extends GenericDao<Fiche_detenteur, Long> implements IFiche_detenteurDao{
     
 }

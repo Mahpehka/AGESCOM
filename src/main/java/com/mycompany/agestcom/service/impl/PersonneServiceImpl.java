@@ -23,6 +23,16 @@ public class PersonneServiceImpl implements IPersonneDao{
     
     private IPersonneDao iPerseonneDao;
 
+    public IPersonneDao getiPerseonneDao() {
+        return iPerseonneDao;
+    }
+
+    public void setiPerseonneDao(IPersonneDao iPerseonneDao) {
+        this.iPerseonneDao = iPerseonneDao;
+    }
+    
+    
+
     public Personne findById(Long id) throws DataAccessException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     

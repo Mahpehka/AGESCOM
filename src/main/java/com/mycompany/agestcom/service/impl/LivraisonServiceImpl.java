@@ -10,6 +10,7 @@ import com.mycompany.agestcom.dao.ILivraisonDao;
 import com.mycompany.agestcom.data.Livraison;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LivraisonServiceImpl implements ILivraisonDao{
     
+    @Autowired
     private ILivraisonDao iLivraisonDao;
 
     public ILivraisonDao getiLivraisonDao() {

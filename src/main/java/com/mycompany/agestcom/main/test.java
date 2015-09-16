@@ -68,20 +68,20 @@ public class test {
      
         
         Fournisseur four =  new Fournisseur();
-        Livraison liv = service.findLivraisonById(1L);
+        //Livraison liv = service.findLivraisonById(1L);
         four.setEmail("mpk@yahoo.fr");
         four.setNom("mimi");
         four.setTel("670041407");
         
-        List<Livraison> list = new ArrayList<Livraison>();
-        Livraison livraison= new Livraison();
-        livraison.setN_bon_livraison(28L);
-        livraison.setStatus_livraison("bonne");
-        livraison.setDate_livraison(new Date());
-        service.createLivraison(livraison);
-        list.add(livraison);
+//        List<Livraison> list = new ArrayList<Livraison>();
+//        Livraison livraison= new Livraison();
+//        livraison.setN_bon_livraison(28L);
+//        livraison.setStatus_livraison("bonne");
+//        livraison.setDate_livraison(new Date());
+//        service.createLivraison(livraison);
+//        list.add(livraison);
 
-         servic.createFournisseur(four);
+        // servic.createFournisseur(four);
          System.out.println("" + four.getNom());
        
         

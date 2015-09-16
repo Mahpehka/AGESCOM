@@ -5,10 +5,15 @@
  */
 package com.mycompany.agestcom.dao.Impl;
 
+import com.douwe.generic.dao.impl.GenericDao;
+import com.mycompany.agestcom.dao.IDemandeDao;
+import com.mycompany.agestcom.data.Demande;
+import java.io.Serializable;
+
 /**
  *
  * @author root
  */
-public class DemandeDaoImpl {
+public class DemandeDaoImpl extends GenericDao<Demande, Long> implements IDemandeDao{
     
 }
