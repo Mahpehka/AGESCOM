@@ -9,15 +9,15 @@
     
 
     <!-- la couche dao  -->
-    <bean id="IPersonneDao" class="com.mycompany.agestcom.dao.Impl.PersonneDaoImpl"/>
-    <bean id="IReformeDao" class="com.mycompany.agestcom.dao.Impl.ReformeDaoImpl"/>
-    <bean id="ICessionDao" class="com.mycompany.agestcom.dao.Impl.CessionDaoImpl"/>
-    <bean id="IFiche_detenteurDao" class="com.mycompany.agestcom.dao.Impl.Fiche_detenteurDaoImpl"/>
-    <bean id="IFournisseurDao" class="com.mycompany.agestcom.dao.Impl.FournisseurDaoImpl"/>
-    <bean id="ICommandeDao" class="com.mycompany.agestcom.dao.Impl.CommandeDaoImpl"/>
-    <bean id="IDemandeDao" class="com.mycompany.agestcom.dao.Impl.DemandeDaoImpl"/>
-    <bean id="IMaterielDao" class="com.mycompany.agestcom.dao.Impl.MaterielDaoImpl"/>
-    <bean id="ILivraisonDao" class="com.mycompany.agestcom.dao.Impl.LivraisonDaoImpl"/>
+    <bean id="IPersonneDao" class="com.mycompany.agestcom.dao.impl.PersonneDaoImpl"/>
+    <bean id="IReformeDao" class="com.mycompany.agestcom.dao.impl.ReformeDaoImpl"/>
+    <bean id="ICessionDao" class="com.mycompany.agestcom.dao.impl.CessionDaoImpl"/>
+    <bean id="IFiche_detenteurDao" class="com.mycompany.agestcom.dao.impl.Fiche_detenteurDaoImpl"/>
+    <bean id="IFournisseurDao" class="com.mycompany.agestcom.dao.impl.FournisseurDaoImpl"/>
+    <bean id="ICommandeDao" class="com.mycompany.agestcom.dao.impl.CommandeDaoImpl"/>
+    <bean id="IDemandeDao" class="com.mycompany.agestcom.dao.impl.DemandeDaoImpl"/>
+    <bean id="IMaterielDao" class="com.mycompany.agestcom.dao.impl.MaterielDaoImpl"/>
+    <bean id="ILivraisonDao" class="com.mycompany.agestcom.dao.impl.LivraisonDaoImpl"/>
 
     <!-- la couche servcie-->
     
@@ -46,11 +46,11 @@
        
         <property name="iReformeDao" ref="IReformeDao"/>
     </bean>
-    <bean id="ILivraisonService" class="com.mycompany.agestcom.service.impl.LivraisonServiceImpl">
+     <bean id="ILivraisonService" class="com.mycompany.agestcom.service.impl.LivraisonServiceImpl">
         <property name="iLivraisonDao" ref="ILivraisonDao"/>
-    </bean>
+     </bean>
      
-     <!-- couche de persistance JPA -->
+    <!-- couche de persistance JPA -->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -93,6 +93,5 @@
 
     <!-- annotations de persistance -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-
 
 </beans>

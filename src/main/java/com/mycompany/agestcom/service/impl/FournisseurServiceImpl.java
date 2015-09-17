@@ -8,9 +8,10 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.IFournisseurDao;
 import com.mycompany.agestcom.data.Fournisseur;
-import java.util.LinkedList;
+import com.mycompany.agestcom.service.IFournisseurService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class FournisseurServiceImpl implements IFournisseurDao{
-     @Autowired
+public class FournisseurServiceImpl implements IFournisseurService{
+    
         private IFournisseurDao iFournisseurDao;
 
     public IFournisseurDao getiFournisseurDao() {
@@ -30,43 +31,53 @@ public class FournisseurServiceImpl implements IFournisseurDao{
         this.iFournisseurDao = iFournisseurDao;
     }
         
-    Fournisseur fournisseur = new Fournisseur();
-
-    public Fournisseur findByNom(String nom) throws DataAccessException {
     
-        fournisseur = iFournisseurDao.findByNom(nom);
-        return fournisseur;
-    }
-    
-
-    public Fournisseur findById(Long id) throws DataAccessException {
-
-       fournisseur = iFournisseurDao.findById(id);
-        return fournisseur; 
-    }
-
-     List<Fournisseur> fournisseurs = new LinkedList();
-    public List<Fournisseur> findAll() throws DataAccessException {
-
-         fournisseurs = iFournisseurDao.findAll();
-        return fournisseurs;
+    public Fournisseur createFournisseur(Fournisseur fournisseur) {
+         try {
+             return iFournisseurDao.create(fournisseur);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+         return null;
     }
 
-    public Fournisseur create(Fournisseur t) throws DataAccessException {
-
-        fournisseur = iFournisseurDao.create(t);
-        return fournisseur;
+    public Fournisseur updateFournisseur(Fournisseur fournisseur) {
+         try {
+             return iFournisseurDao.update(fournisseur);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
-    public void delete(Fournisseur t) throws DataAccessException {
-
-        iFournisseurDao.delete(t);
+    public Fournisseur findFournisseurById(Long id) {
+         try {
+             return iFournisseurDao.findById(id);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
-    public Fournisseur update(Fournisseur t) throws DataAccessException {
+    public List<Fournisseur> findAllFournisseurs() {
+         try {
+             return iFournisseurDao.findAll();
+         } catch (DataAccessException ex) {
+             Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
+    }
 
-        fournisseur =iFournisseurDao.create(t);
-        return fournisseur;
+    public void deleteFournisseur(Long id) {
+         try {
+             Fournisseur fournisseur = iFournisseurDao.findById(id);
+             if(fournisseur != null){
+                 iFournisseurDao.delete(fournisseur);
+             }
+         } catch (DataAccessException ex) {
+             Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package com.mycompany.agestcom.data;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ import javax.persistence.Entity;
  * @author root
  */
 @Entity
-public class Fiche_detenteur {
+public class Fiche_detenteur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long N_serie;

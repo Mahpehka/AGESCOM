@@ -8,6 +8,7 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.ICommandeDao;
 import com.mycompany.agestcom.data.Commande;
+import com.mycompany.agestcom.service.ICommandeService;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class CommandeServiceImpl implements ICommandeDao{
+public class CommandeServiceImpl implements ICommandeService{
     
      private ICommandeDao iCommandeDao;
 
@@ -29,33 +30,25 @@ public class CommandeServiceImpl implements ICommandeDao{
         this.iCommandeDao = iCommandeDao;
     }
 
-    Commande commande = new Commande();
-
-    public Commande findById(Long id) throws DataAccessException {
-        commande = iCommandeDao.findById(id);
-        return commande;
-    }
-    List<Commande> commandes = new LinkedList();
-
-    public List<Commande> findAll() throws DataAccessException {
-        commandes = iCommandeDao.findAll();
-        return commandes;
+    
+    public Commande createCommande(Commande commande) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Commande create(Commande t) throws DataAccessException {
-
-        commande = iCommandeDao.create(t);
-        return commande;
+    public Commande updateCommande(Commande commande) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void delete(Commande t) throws DataAccessException {
-
-        iCommandeDao.delete(t);
+    public Commande findCommandeById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Commande update(Commande t) throws DataAccessException {
-        iCommandeDao.delete(t);
-        return commande;
+    public List<Commande> findAllCommande() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void deleteCommande(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

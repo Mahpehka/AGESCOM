@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.agestcom.dao.Impl;
+package com.mycompany.agestcom.dao.impl;
 
 import com.douwe.generic.dao.impl.GenericDao;
-import com.mycompany.agestcom.dao.ISortieDao;
-import com.mycompany.agestcom.data.Sortie;
-import java.io.Serializable;
+import com.mycompany.agestcom.dao.ILivraisonDao;
+import com.mycompany.agestcom.data.Livraison;
 
 /**
  *
  * @author root
  */
-public class SortieDaoImpl extends GenericDao<Sortie, Long> implements ISortieDao{
+public class LivraisonDaoImpl extends GenericDao<Livraison, Long> implements ILivraisonDao{
     
 }

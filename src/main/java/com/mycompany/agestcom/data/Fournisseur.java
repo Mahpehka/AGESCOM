@@ -22,7 +22,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name = "Fournisseur.findByNom",query = " SELECT fournisseur from Fournisseur fournisseur WHERE fournisseur.nom= :param"),
+@NamedQuery(name = "Fournisseur.findByNom",query = " SELECT f from Fournisseur f WHERE f.nom= :param"),
 })
 public class Fournisseur implements Serializable{
     @Id

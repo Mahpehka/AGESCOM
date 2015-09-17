@@ -83,7 +83,16 @@ public class Commande implements  Serializable{
         this.quantite = quantite;
     }
 
+    public Livraison getLivraison() {
+        return livraison;
+    }
+
+    public void setLivraison(Livraison livraison) {
+        this.livraison = livraison;
+    }
+
    
+    
 
 
     

@@ -8,9 +8,11 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.ILivraisonDao;
 import com.mycompany.agestcom.data.Livraison;
+import com.mycompany.agestcom.service.ILivraisonService;
 import java.util.LinkedList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,9 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class LivraisonServiceImpl implements ILivraisonDao{
+public class LivraisonServiceImpl implements ILivraisonService{
     
-    @Autowired
+    
     private ILivraisonDao iLivraisonDao;
 
     public ILivraisonDao getiLivraisonDao() {
@@ -31,36 +33,52 @@ public class LivraisonServiceImpl implements ILivraisonDao{
         this.iLivraisonDao = iLivraisonDao;
     }
     
-    Livraison livraison= new  Livraison();
-    public Livraison findById(Long id) throws DataAccessException {
-
-         livraison = iLivraisonDao.findById(id);
-        return livraison;
-    }
     
-    List<Livraison> livraisons = new LinkedList();
-    public List<Livraison> findAll() throws DataAccessException {
-
-         livraisons = iLivraisonDao.findAll();
-        return livraisons;
+    public Livraison createLivraison(Livraison livraison) {
+        try {
+            return iLivraisonDao.create(livraison);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
-    public Livraison create(Livraison t) throws DataAccessException {
-
-        livraison = iLivraisonDao.create(t);
-        return livraison;
-    }
-    
-
-    public void delete(Livraison t) throws DataAccessException {
-
-         iLivraisonDao.delete(t);
+    public Livraison updateLivraison(Livraison Livraison) {
+        try {
+            return iLivraisonDao.update(Livraison);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
-    public Livraison update(Livraison t) throws DataAccessException {
+    public Livraison findLivraisonById(Long id) {
+        try {
+            return iLivraisonDao.findById(id);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
-        iLivraisonDao.delete(t);
-        return livraison;
+    public List<Livraison> findAllLivraison() {
+        try {
+            return iLivraisonDao.findAll();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void deleteLivraison(Long id) {
+        try {
+            Livraison livraison = iLivraisonDao.findById(id);
+            if(livraison != null){
+                iLivraisonDao.delete(livraison);
+            }
+        } catch (DataAccessException ex) {
+            Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

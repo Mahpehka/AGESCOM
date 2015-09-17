@@ -8,8 +8,11 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.ICessionDao;
 import com.mycompany.agestcom.data.Cession;
+import com.mycompany.agestcom.service.ICessionService;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class CessionServiceImpl implements ICessionDao {
+public class CessionServiceImpl implements ICessionService {
 
     private ICessionDao iCessionDao;
 
@@ -28,33 +31,52 @@ public class CessionServiceImpl implements ICessionDao {
     public void setiCessionDao(ICessionDao iCessionDao) {
         this.iCessionDao = iCessionDao;
     }
-    Cession cession = new Cession();
-
-    public Cession findById(Long id) throws DataAccessException {
-
-        cession = iCessionDao.findById(id);
-        return cession;
-    }
-    List<Cession> cessions = new LinkedList();
-    public List<Cession> findAll() throws DataAccessException {
-        cessions = iCessionDao.findAll();
-        return cessions;
+  
+    public Cession createCession(Cession cession) {
+        try {
+            return iCessionDao.create(cession);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(CessionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
-    public Cession create(Cession t) throws DataAccessException {
-        Cession c = new Cession();
-        cession = iCessionDao.create(t);
-        return cession;
+    public Cession updateCession(Cession cession) {
+        try {
+            return iCessionDao.update(cession);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(CessionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
-    public void delete(Cession t) throws DataAccessException {
-         iCessionDao.delete(t);
+    public List<Cession> findAllCession() {
+        try {
+            return iCessionDao.findAll();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(CessionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
-    public Cession update(Cession t) throws DataAccessException {
-         Cession c = new Cession();
-         iCessionDao.delete(t);
-        return cession;
+    public void deleteCession(Long id) {
+        try {
+            Cession cession = iCessionDao.findById(id);
+            if(cession != null ){
+                iCessionDao.delete(cession);
+            }
+        } catch (DataAccessException ex) {
+            Logger.getLogger(CessionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Cession findById(Long id) {
+        try {
+            return iCessionDao.findById(id);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(CessionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
 }

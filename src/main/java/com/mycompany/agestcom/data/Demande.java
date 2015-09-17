@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -31,7 +32,9 @@ public class Demande implements Serializable{
     private Date date;
     @Column( nullable = false)
     private int quantite;
+    @ManyToOne
     private Personne personne;
+    @ManyToOne
     private Materiel materiel; 
 
     public Long getId() {

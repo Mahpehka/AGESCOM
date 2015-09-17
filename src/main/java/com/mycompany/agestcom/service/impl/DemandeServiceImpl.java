@@ -8,6 +8,7 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.IDemandeDao;
 import com.mycompany.agestcom.data.Demande;
+import com.mycompany.agestcom.service.IDemandeService;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class DemandeServiceImpl implements IDemandeDao{
+public class DemandeServiceImpl implements IDemandeService{
     
     private IDemandeDao iDemandeDao;
 
@@ -29,33 +30,25 @@ public class DemandeServiceImpl implements IDemandeDao{
         this.iDemandeDao = iDemandeDao;
     }
     
-    Demande demande=new  Demande();
-    public Demande findById(Long id) throws DataAccessException {
-
-         demande = iDemandeDao.findById(id);
-        return demande;
-    }
     
-    List<Demande> demandes = new LinkedList();
-    public List<Demande> findAll() throws DataAccessException {
-
-        demandes = iDemandeDao.findAll();
-        return demandes;
+    public Demande createDemande(Demande demande) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Demande create(Demande t) throws DataAccessException {
-        demande = iDemandeDao.create(t);
-        return demande;
+    public Demande updateDemande(Demande demande) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void delete(Demande t) throws DataAccessException {
-           iDemandeDao.delete(t);
+    public Demande findDemandeById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Demande update(Demande t) throws DataAccessException {
+    public List<Demande> findAllDemande() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-         iDemandeDao.delete(t);
-        return demande;
+    public void deleteDemande(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

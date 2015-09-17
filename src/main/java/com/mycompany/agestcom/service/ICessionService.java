@@ -19,7 +19,7 @@ public interface ICessionService {
     public  Cession updateCession( Cession cession) ;
     public List<Cession> findAllCession() ;
     public void deleteCession(Long id) ;
-    public Cession findById() ;
+    public Cession findById(Long id) ;
     
     
 }

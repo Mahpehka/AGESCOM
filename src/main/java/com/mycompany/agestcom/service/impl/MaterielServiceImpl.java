@@ -8,6 +8,7 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.IMaterielDao;
 import com.mycompany.agestcom.data.Materiel;
+import com.mycompany.agestcom.service.IMaterielServcice;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class MaterielServiceImpl implements IMaterielDao{
+public class MaterielServiceImpl implements IMaterielServcice{
     private  IMaterielDao iMaterielDao;
 
     public IMaterielDao getiMaterielDao() {
@@ -28,35 +29,37 @@ public class MaterielServiceImpl implements IMaterielDao{
         this.iMaterielDao = iMaterielDao;
     }
     
-    Materiel materiel=new  Materiel();
-    public Materiel findById(Long id) throws DataAccessException {
-
-        materiel = iMaterielDao.findById(id);
-        return materiel;
+   
+    public Materiel createMateriel(Materiel materiel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-     List<Materiel> materiels = new LinkedList();
-    public List<Materiel> findAll() throws DataAccessException {
-
-        materiels = iMaterielDao.findAll();
-        return materiels;
+    public Materiel updateMateriel(Materiel materiel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Materiel create(Materiel t) throws DataAccessException {
-
-        materiel = iMaterielDao.create(t);
-        return materiel;
+    public Materiel findFMaterielById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void delete(Materiel t) throws DataAccessException {
-
-           iMaterielDao.delete(t);
+    public Materiel findMaterielByN_serie(String n_serie) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Materiel update(Materiel t) throws DataAccessException {
+    public List<Materiel> findAllMateriel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-        iMaterielDao.delete(t);
-        return materiel;
+    public void deleteMateriel(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Materiel findMaterielById(long l) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Materiel findMaterielByN_serieById(long l) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 }

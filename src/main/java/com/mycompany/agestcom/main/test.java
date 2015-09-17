@@ -1,27 +1,10 @@
 package com.mycompany.agestcom.main;
 
 import com.douwe.generic.dao.DataAccessException;
-import com.douwe.generic.dao.impl.GenericDao;
-import com.mycompany.agestcom.dao.IFournisseurDao;
-import com.mycompany.agestcom.dao.ILivraisonDao;
-import com.mycompany.agestcom.dao.Impl.FournisseurDaoImpl;
-import com.mycompany.agestcom.dao.Impl.LivraisonDaoImpl;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.data.Livraison;
-import com.mycompany.agestcom.data.Materiel;
-import com.mycompany.agestcom.data.Personne;
-import com.mycompany.agestcom.service.ICommandeService;
 import com.mycompany.agestcom.service.IFournisseurService;
 import com.mycompany.agestcom.service.ILivraisonService;
-import com.mycompany.agestcom.service.IMaterielServcice;
-import com.mycompany.agestcom.service.IPersonneService;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -68,7 +51,7 @@ public class test {
      
         
         Fournisseur four =  new Fournisseur();
-        //Livraison liv = service.findLivraisonById(1L);
+        Livraison liv = service.findLivraisonById(1L);
         four.setEmail("mpk@yahoo.fr");
         four.setNom("mimi");
         four.setTel("670041407");
@@ -81,7 +64,7 @@ public class test {
 //        service.createLivraison(livraison);
 //        list.add(livraison);
 
-        // servic.createFournisseur(four);
+         servic.createFournisseur(four);
          System.out.println("" + four.getNom());
        
         
