@@ -16,9 +16,13 @@ import org.hibernate.service.spi.ServiceException;
 public interface ICessionService {
     
     public Cession createCession(Cession cession) ;
+   
     public  Cession updateCession( Cession cession) ;
+    
     public List<Cession> findAllCession() ;
+    
     public void deleteCession(Long id) ;
+    
     public Cession findById(Long id) ;
     
     
