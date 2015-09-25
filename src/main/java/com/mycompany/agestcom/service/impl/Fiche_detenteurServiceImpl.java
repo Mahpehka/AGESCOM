@@ -11,6 +11,8 @@ import com.mycompany.agestcom.data.Fiche_detenteur;
 import com.mycompany.agestcom.service.IFiche_detenteurService;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -32,22 +34,51 @@ public class Fiche_detenteurServiceImpl implements IFiche_detenteurService{
 
    
     public Fiche_detenteur createFiche_detenteur(Fiche_detenteur fiche_detenteur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iFiche_detenteurDao.create(fiche_detenteur);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(Fiche_detenteurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Fiche_detenteur updateFiche_detenteur(Fiche_detenteur fiche_detenteur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
+        try {
+            return  iFiche_detenteurDao.update(fiche_detenteur);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(Fiche_detenteurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public Fiche_detenteur findFiche_detenteurById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iFiche_detenteurDao.findById(id);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(Fiche_detenteurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public List<Fiche_detenteur> findAllFiche_detenteurs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iFiche_detenteurDao.findAll();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(Fiche_detenteurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void deleteFiche_detenteur(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            Fiche_detenteur fiche_detenteur=iFiche_detenteurDao.findById(id);
+            iFiche_detenteurDao.delete(fiche_detenteur);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(Fiche_detenteurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -11,6 +11,8 @@ import com.mycompany.agestcom.data.Reforme;
 import com.mycompany.agestcom.service.IReformeService;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -31,19 +33,43 @@ public class ReformeServiceIpml implements IReformeService{
 
    
     public Reforme createReforme(Reforme reforme) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iReformeDao.create(reforme);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(ReformeServiceIpml.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public Reforme updateReforme(Reforme reforme) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iReformeDao.update(reforme);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(ReformeServiceIpml.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public List<Reforme> findAllReforme() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iReformeDao.findAll();
+         } catch (DataAccessException ex) {
+             Logger.getLogger(ReformeServiceIpml.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public void deleteReforme(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             Reforme reforme=iReformeDao.findById(id);
+             iReformeDao.delete(reforme);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(ReformeServiceIpml.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
 }

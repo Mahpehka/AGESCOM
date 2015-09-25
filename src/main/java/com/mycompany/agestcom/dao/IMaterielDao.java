@@ -5,6 +5,7 @@
  */
 package com.mycompany.agestcom.dao;
 
+import com.douwe.generic.dao.DataAccessException;
 import com.douwe.generic.dao.IDao;
 import com.mycompany.agestcom.data.Materiel;
 import java.io.Serializable;
@@ -14,5 +15,7 @@ import java.io.Serializable;
  * @author root
  */
 public interface IMaterielDao extends IDao<Materiel, Long>{
+    
+     public Materiel findMaterielByN_serie(String n_serie) throws DataAccessException;
     
 }

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author root
  */
-public interface IMaterielServcice {
+public interface IMaterielService {
     public Materiel createMateriel(Materiel materiel);
     public  Materiel updateMateriel( Materiel materiel);
     public  Materiel findFMaterielById(Long id);

@@ -7,7 +7,6 @@ package com.mycompany.agestcom.service;
 
 import com.mycompany.agestcom.data.Fournisseur;
 import java.util.List;
-import org.hibernate.service.spi.ServiceException;
 
 /**
  *

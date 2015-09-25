@@ -11,6 +11,8 @@ import com.mycompany.agestcom.data.Commande;
 import com.mycompany.agestcom.service.ICommandeService;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -32,23 +34,54 @@ public class CommandeServiceImpl implements ICommandeService{
 
     
     public Commande createCommande(Commande commande) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iCommandeDao.create(commande);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(CommandeServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public Commande updateCommande(Commande commande) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iCommandeDao.update(commande);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(CommandeServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public Commande findCommandeById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iCommandeDao.findById(id);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(CommandeServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public List<Commande> findAllCommande() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             return iCommandeDao.findAll();
+         } catch (DataAccessException ex) {
+             Logger.getLogger(CommandeServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     public void deleteCommande(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+         try {
+             Commande commande=iCommandeDao.findById(id);
+             if((commande!= null))
+                 iCommandeDao.delete(commande);
+         } catch (DataAccessException ex) {
+             Logger.getLogger(CommandeServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
 }

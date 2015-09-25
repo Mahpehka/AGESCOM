@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        
+        
+        <div>TODO write content</div>
+        
+        
+        <div id="top"> </div>
+            <div id="menu">
+                <ui:include src="menu.xhtml"/>
+            </div>
+        
+        <div style="height: 20px;"> </div>
+        <f:view>
+            
+            <h:form id='tableForm'>
+
+                <p:dataTable value="#{materielBean.allMateriel}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materielchoisi}" rowKey="#{item.id}">
+
+                    <f:facet name="header">
+                        L'ensemble du materiel
+                    </f:facet>
+
+                    <p:column filterBy="#{item.designation}">
+                        <f:facet name="header">
+                            <h:outputText value="Designation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.designation}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.n_serie}">
+                        <f:facet name="header">
+                            <h:outputText value="n_serie"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_serie}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                    </p:column>
+
+                </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouveau materiel"/>
+                <p:commandButton type="button" onclick="PF('dl').show()" value="Modifier"/>
+                <p:commandButton  type="button"  value="Supprimer" onclick="PF('cd').show()" />
+            </h:form>
+        </f:view>
+
+
+        <p:dialog widgetVar="dlg" header=" Enregistrer une nouveau materiel" hideEffect="explode" showEffect="explode" modal="true">
+        <h:form>
+           
+            <p:panelGrid columns="2">
+
+                <p:outputLabel value="Designation:" for="designation" />
+                <p:inputText id="designation" value="#{materielBean.materiel.designation}" title="Designation" />
+                <p:outputLabel value="Type:" for="type" />
+                <p:inputText id="type" value="#{materielBean.materiel.type}" title="Type" />
+                <p:outputLabel value="N_serie:" for="n_serie" />
+                <p:inputText id="n_serie" value="#{materielBean.materiel.n_serie}" title="N_serie" />
+                <p:commandButton value="Enregistrer" action="#{materielBean.createMateriel()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table" />
+              
+            </p:panelGrid>
+        </h:form>
+            
+        </p:dialog>
+        
+        
+        <p:dialog widgetVar="dl" header=" Modifier un materiel" hideEffect="explode" showEffect="explode" modal="true">
+        <h:form>
+            
+            <p:panelGrid columns="2">
+
+                <p:outputLabel value="Designation:" for="designation" />
+                <p:inputText id="designation" value="#{materielBean.materielchoisi.designation}" title="Designation" />
+                <p:outputLabel value="Type:" for="type" />
+                <p:inputText id="type" value="#{materielBean.materielchoisi.type}" title="Type" />
+                <p:outputLabel value="N_serie:" for="n_serie" />
+                <p:inputText id="n_serie" value="#{materielBean.materielchoisi.n_serie}" title="N_serie" />
+                <p:commandButton value="Modifier" action="#{materielBean.updateMateriel()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+              
+            </p:panelGrid>
+        </h:form>
+        </p:dialog>
+        
+        <p:confirmDialog message="Voulez vous vraiment supprimer ?" severity="alert" widgetVar="cd" hideEffect="fade">
+            <p:commandButton value="Oui" actionListener="#{materielBean.deleteMateriel()}" oncomplete="PF('cd').hide()" update=":tableForm:table"/>
+            <p:commandButton value="Non" onclick="PF('cd').hide()" type="button" />
+            
+            </p:confirmDialog>
+    </body>
+</html>

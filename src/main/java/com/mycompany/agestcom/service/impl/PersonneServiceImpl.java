@@ -34,23 +34,53 @@ public class PersonneServiceImpl implements IPersonneService{
     
 
     public Personne createPersonne(Personne personne) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iPerseonneDao.create(personne);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Personne updatePersonne(Personne personne) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return  iPerseonneDao.update(personne);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Personne findPersonneById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iPerseonneDao.findById(id);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public List<Personne> findAllPersonne() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iPerseonneDao.findAll();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void deletePersonne(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            Personne personne=iPerseonneDao.findById(id);
+            iPerseonneDao.delete(personne);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 

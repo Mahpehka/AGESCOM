@@ -8,9 +8,11 @@ package com.mycompany.agestcom.service.impl;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.IMaterielDao;
 import com.mycompany.agestcom.data.Materiel;
-import com.mycompany.agestcom.service.IMaterielServcice;
-import java.util.LinkedList;
+import com.mycompany.agestcom.service.IMaterielService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,7 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @author root
  */
 @Transactional
-public class MaterielServiceImpl implements IMaterielServcice{
+public class MaterielServiceImpl implements IMaterielService{
+    
+    private IMaterielDao materielDao;
+       
     private  IMaterielDao iMaterielDao;
 
     public IMaterielDao getiMaterielDao() {
@@ -31,36 +36,70 @@ public class MaterielServiceImpl implements IMaterielServcice{
     
    
     public Materiel createMateriel(Materiel materiel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iMaterielDao.create(materiel);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Materiel updateMateriel(Materiel materiel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return  iMaterielDao.update(materiel);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Materiel findFMaterielById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return iMaterielDao.findById(id);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Materiel findMaterielByN_serie(String n_serie) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+         try {
+            Materiel materiel = materielDao.findMaterielByN_serie(n_serie);
+            if (materiel == null) {
+                throw new ServiceException("Le materiel dont le numéro est " + n_serie + " n'existe pas");
+            }
+            return materiel;
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
     }
 
     public List<Materiel> findAllMateriel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            return  iMaterielDao.findAll();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void deleteMateriel(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            Materiel materiel=iMaterielDao.findById(id);
+            iMaterielDao.delete(materiel);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(MaterielServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public Materiel findMaterielById(long l) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Materiel findMaterielByN_serieById(long l) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-   
+    
 }
 

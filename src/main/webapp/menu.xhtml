@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form>
+        <p:tabMenu>
+            <p:menuitem value="Accueil" action="#{orientationBean.accueil()}" icon="ui-icon-home"/>
+            <p:menuitem value="Materiel" action="#{orientationBean.materiel()}" />
+            <p:menuitem value="Fournisseur" action="#{orientationBean.fournisseur()}" />
+            <p:menuitem value="Commande" action="#{orientationBean.commande()}"/>
+            <p:menuitem value="Reforme" action="#{orientationBean.reforme()}"/>
+            <p:menuitem value="Cession" action="#{orientationBean.cession()}"/>
+            <p:menuitem value="Demande" action="#{orientationBean.demande()}"/>
+            <p:menuitem value="Fiche_detenteur" action="#{orientationBean.fiche_detenteur()}"/>
+            <p:menuitem value="Livraison" action="#{orientationBean.livraison()}"/>
+        </p:tabMenu>
+    </h:form>
+     
+</html>
