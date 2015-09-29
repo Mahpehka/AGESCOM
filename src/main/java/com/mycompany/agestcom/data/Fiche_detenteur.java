@@ -20,8 +20,11 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Fiche_detenteur implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column( nullable = false)
     private  Long N_serie;
     @Column( nullable = false)
     private String designation_materiel;
@@ -30,6 +33,7 @@ public class Fiche_detenteur implements Serializable {
     @ManyToOne
     private Materiel materiel;
 
+    
     public Long getN_serie() {
         return N_serie;
     }
@@ -61,6 +65,15 @@ public class Fiche_detenteur implements Serializable {
     public void setMateriel(Materiel materiel) {
         this.materiel = materiel;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     
     
     

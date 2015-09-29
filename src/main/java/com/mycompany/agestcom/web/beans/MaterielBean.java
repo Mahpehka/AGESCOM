@@ -6,13 +6,13 @@
 package com.mycompany.agestcom.web.beans;
 
 import com.mycompany.agestcom.data.Materiel;
+import com.mycompany.agestcom.data.Type;
 import com.mycompany.agestcom.service.IMaterielService;
+import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import org.hibernate.service.spi.ServiceException;
 
 /**
  *
@@ -22,23 +22,21 @@ import org.hibernate.service.spi.ServiceException;
 @RequestScoped
 public class MaterielBean {
 
-    @ManagedProperty(value = "#{IMaterielService}")
-     IMaterielService service;
+     @ManagedProperty(value = "#{IMaterielService}")
+     IMaterielService iMaterielService;
     
-    private Materiel materiel = new Materiel();
-    private Materiel materielchoisi = new Materiel();
-    /**
-     * Creates a new instance of MaterielBean
-     */
+     Materiel materiel = new Materiel();
+  
     public MaterielBean() {
+        
     }
 
-    public IMaterielService getService() {
-        return service;
+    public IMaterielService getiMaterielService() {
+        return iMaterielService;
     }
 
-    public void setService(IMaterielService service) {
-        this.service = service;
+    public void setiMaterielService(IMaterielService iMaterielService) {
+        this.iMaterielService = iMaterielService;
     }
 
     public Materiel getMateriel() {
@@ -49,42 +47,27 @@ public class MaterielBean {
         this.materiel = materiel;
     }
 
-    public Materiel getMaterielchoisi() {
-        return materielchoisi;
+    public Materiel createMateriel(){
+      return iMaterielService.createMateriel(materiel);
     }
-
-    public void setMaterielchoisi(Materiel materielchoisi) {
-        this.materielchoisi = materielchoisi;
+    public  Materiel updateMateriel(){
+      return iMaterielService.updateMateriel(materiel);
     }
-    
-    
-   public List<Materiel> getAllMateriel() throws ServiceException{
-        if(service == null){
-                System.out.println("This is my service");
-                System.out.println(service);
-        }
-        return service.findAllMateriel();
+    public  Materiel findFMaterielById(){
+      return iMaterielService.findFMaterielById(materiel.getId());
     }
-    
-    public String createMateriel() throws ServiceException{
-        service.createMateriel(materiel);
-        materiel=new  Materiel();
-        return "create";
+    public Materiel findMaterielByN_serie(){
+      return iMaterielService.findMaterielByN_serie(materiel.getN_serie());
     }
-    
-    public String updateMateriel() throws ServiceException{
-        System.out.println(materiel);
-        service.updateMateriel(materiel);
-        materiel=new  Materiel();
-        return "update";
+    public List<Materiel> findAllMateriel(){
+      return iMaterielService.findAllMateriel();
     }
-    
-    public String deleteMateriel() throws ServiceException{
-        System.out.println("le Materiel");
-        System.out.println(materiel);
-        service.deleteMateriel(materiel.getId());
-        materiel=new Materiel();
-        return "supprimer";
+   
+    public List getTypes() {
+        List<Type> result = new ArrayList<Type>();
+        result.add(Type.consomptible);
+        result.add(Type.durable);
+        return result;
     }
-    
 }
+

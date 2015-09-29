@@ -7,11 +7,13 @@ package com.mycompany.agestcom.service;
 
 import com.mycompany.agestcom.data.Materiel;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author root
  */
+@Transactional
 public interface IMaterielService {
     public Materiel createMateriel(Materiel materiel);
     public  Materiel updateMateriel( Materiel materiel);

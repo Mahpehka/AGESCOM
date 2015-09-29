@@ -5,14 +5,14 @@
  */
 package com.mycompany.agestcom.web.beans;
 
-import javax.inject.Named;
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author root
  */
-@Named(value = "connexionBean")
+@ManagedBean
 @RequestScoped
 public class ConnexionBean {
 
@@ -20,6 +20,13 @@ public class ConnexionBean {
      * Creates a new instance of ConnexionBean
      */
     public ConnexionBean() {
+      
     }
     
-}
+    public  String seconnecter(){
+          return "src/main/webapp/menu.xhtml?faces-redirect=true";
+    
+    }
+    }
+    
+

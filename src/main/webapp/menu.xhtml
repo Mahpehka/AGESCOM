@@ -4,18 +4,25 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
+    
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
     <h:form>
-        <p:menubar>
+        <p:tabMenu>
             <p:menuitem value="Accueil" action="#{orientationBean.accueil()}" icon="ui-icon-home"/>
-            <p:menuitem value="Materiel" action="#{orientationBean.materiel()}" />
-            <p:menuitem value="Fournisseur" action="#{orientationBean.fournisseur()}" />
-            <p:menuitem value="Commande" action="#{orientationBean.commande()}"/>
+            <p:menuitem value="Materiel" url="Materiel.xhtml" />
+            <p:menuitem value="Fournisseur" url="Fournisseur.xhtml" />
+            <p:menuitem value="Commande" url="Commande.xhtml"/>
             <p:menuitem value="Reforme" action="#{orientationBean.reforme()}"/>
             <p:menuitem value="Cession" action="#{orientationBean.cession()}"/>
             <p:menuitem value="Demande" action="#{orientationBean.demande()}"/>
             <p:menuitem value="Fiche_detenteur" action="#{orientationBean.fiche_detenteur()}"/>
             <p:menuitem value="Livraison" action="#{orientationBean.livraison()}"/>
-        </p:menubar>
+        </p:tabMenu>
     </h:form>
+    </body> 
      
 </html>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -11,20 +15,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-
-
+       
         <div id="top"> </div>
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
 
         <div style="height: 100px;"> </div>
-
-        <f:view>
+        
+         <f:view>
 
 
             <h:form>
-                <p:dataTable value="#{materielBean.findAllMateriel()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materiel}" rowKey="#{item.id}">
+                <p:dataTable value="#{FournisseurBean.findAllFournisseur()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{FournisseurBean.Fournisseur}" rowKey="#{item.id}">
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>
@@ -33,57 +36,56 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Designation"/>
+                            <h:outputText value="Nom"/>
                         </f:facet>
-                        <h:outputText value="#{item.designation}"/>
+                        <h:outputText value="#{item.nom}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="N_serie"/>
+                            <h:outputText value="Prenom"/>
                         </f:facet>
-                        <h:outputText value="#{item.n_serie}"/>
+                        <h:outputText value="#{item.prenom}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Type"/>
+                            <h:outputText value="Email"/>
                         </f:facet>
-                        <h:outputText value="#{item.type}"/>
+                        <h:outputText value="#{item.email}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
         </f:view>
+        <p:commandButton type="button" onclick="PF('dlg').show()" value="NouveauMateriel" />
+        <p:commandButton  onclick="PF('dl').show()" value="Modifier Materiels" update=":formModifier:panelGModifier"/>
 
-        <p:dialog widgetVar="dlg" header=" Enregistrer un nouveau Materiel" hideEffect="explode" showEffect="explode" modal="true">
+        <p:dialog widgetVar="dlg" header=" Enregistrer un Fournisseur" hideEffect="explode" showEffect="explode" modal="true">
             <h:form >
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="Designation:" for="designation" />
-                    <p:inputText id="designation" value="#{materielBean.materiel.designation}" title="Designatioon" />
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{FournisseurBean.fournisseur.nom}" title="nom" />
                     <p:outputLabel value="N_serie:" for="n_serie" />
-                    <p:inputText id="n_serie" value="#{materielBean.materiel.n_serie}" title="N_serie" />
-                    <p:outputLabel value="Type:"/>
-                    <p:selectOneMenu value="#{materielBean.materiel.type}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
-                        <f:selectItems var="cust" value="#{materielBean.types}"    itemLabelEscaped="true" />
-                    </p:selectOneMenu>
+                    <p:inputText id="n_serie" value="#{FournisseurBean.fournisseur.prenom}" title="prenom" />
+                    <p:outputLabel value="Email:" for="email"/>
+                    <p:inputText id="email" value="#{FournisseurBean.Fournisseur.email}" title="email"/>
                 </p:panelGrid>
-                <p:commandButton value="Enregistrer" action="#{materielBean.createMateriel()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+                <p:commandButton value="Enregistrer" action="#{FournisseurBean.createFournisseur()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
             </h:form>
         </p:dialog>
 
 
-        <p:dialog widgetVar="dl" header=" Modifier un materiel" hideEffect="fold" showEffect="explode" resizable="true">
+        <p:dialog widgetVar="dl" header=" Modifier un fournisseur" hideEffect="fold" showEffect="explode" resizable="true">
 
             <h:form id="formModifier">
                 <p:panelGrid columns="2" id="panelGModifier">
-                    <p:outputLabel value="Designation:" for="designation" />
-                    <p:inputText id="designation" value="#{materielBean.materiel.designation}" title="Designation" />
-                    <p:outputLabel value="N_serie:" for="n_serie" />
-                    <p:inputText id="n_serie" value="#{materielBean.materiel.n_serie}" title="N_serie" />
-                    <p:outputLabel value="Type:"/>
-                    <p:selectOneMenu value="#{materielBean.materiel.type}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
-                        <f:selectItems var="cust" value="#{materielBean.types}"    itemLabelEscaped="true" />
-                    </p:selectOneMenu>
-                    <h:inputHidden id="number" value="#{materielBean.materiel.setId(id)}" />
-                    <p:commandButton value="Modifier" action="#{materielBean.updateMateriel()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{FournisseurBean.founisseur.nom}" title="Nom" />
+                    <p:outputLabel value="Prenom:" for="prenom" />
+                    <p:inputText id="prenom" value="#{FournisseurBean.fournisseur.prenom}" title="Prenom" />
+                    <p:outputLabel value="Email:" for="email"/>
+                    <p:inputText id="email" value="#{FournisseurBean.fournisseur.email}" title="Email" />
+   
+                    <h:inputHidden id="number" value="#{FournisseurBean.fournisseur.setId(id)}" />
+                    <p:commandButton value="Modifier" action="#{FournisseurBean.updateFournisseur()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
                 </p:panelGrid>
             </h:form>
         </p:dialog>
@@ -91,7 +93,7 @@
         <f:view>
 
 
-            <h:form id='tableForm'>
+           <!-- <h:form id='tableForm'>
                 <p:dataTable value="#{materielBean.findAllMateriel()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materiel}" rowKey="#{item.id}">
                     <f:facet name="header">
                         La liste des materiels
@@ -118,10 +120,10 @@
                 <p:commandButton type="button" onclick="PF('dlg').show()" value="NouveauMateriel" />
                 <p:commandButton  onclick="PF('dl').show()" value="Modifier Materiels" update=":formModifier:panelGModifier"/>
 
-            </h:form>
+            </h:form>-->
 
 
         </f:view>
-
+         
     </body>
 </html>

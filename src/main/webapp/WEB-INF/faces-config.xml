@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+    </application>
+     <!-- <navigation-rule>
+        <from-view-id>/Matetiel.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>save</from-outcome>
+            <to-view-id>Materiel.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>update</from-outcome>
+            <to-view-id>Materiel.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+   
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>accueil</from-outcome>
+            <to-view-id>/menu.xhtml</to-view-id>
+            <redirect>/menu.xhtml</redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>Fournisseur</from-outcome>
+            <to-view-id>/Fournisseur.xhtml</to-view-id>
+            <redirect>/Fournisseur.xhtml</redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>Personne</from-outcome>
+            <to-view-id>/Personne.xhtml</to-view-id>
+            <redirect>/Personne.xhtml</redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>Connexion</from-outcome>
+            <to-view-id>/Connexion.xhtml</to-view-id>
+            <redirect>/Connexion.xhtml</redirect>
+        </navigation-case>
+    </navigation-rule>-->
+    
+</faces-config>
+
+</faces-config>
