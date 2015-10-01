@@ -6,11 +6,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>AGESCOM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
 
 
         <div id="top"> </div>
@@ -20,39 +20,7 @@
 
         <div style="height: 100px;"> </div>
 
-        <f:view>
-
-
-            <h:form>
-                <p:dataTable value="#{materielBean.findAllMateriel()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materiel}" rowKey="#{item.id}">
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Designation"/>
-                        </f:facet>
-                        <h:outputText value="#{item.designation}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="N_serie"/>
-                        </f:facet>
-                        <h:outputText value="#{item.n_serie}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Type"/>
-                        </f:facet>
-                        <h:outputText value="#{item.type}"/>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-        </f:view>
-
+        
         <p:dialog widgetVar="dlg" header=" Enregistrer un nouveau Materiel" hideEffect="explode" showEffect="explode" modal="true">
             <h:form >
                 <p:panelGrid columns="2">
@@ -123,5 +91,5 @@
 
         </f:view>
 
-    </body>
+    </h:body>
 </html>
