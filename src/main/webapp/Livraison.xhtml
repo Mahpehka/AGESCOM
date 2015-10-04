@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>AGESCOM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+         <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 20px; "> </div>
+
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{livraisonBean.findAllLivraison }" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date_livraison"/>
+                        </f:facet>
+                        <h:outputText value="#{item.date_livraison}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="N_bon_livraison"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_bon_livraison}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status_livraison"/>
+                        </f:facet>
+                        <h:outputText value="#{item.status_livraison}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </body>
+</html>
