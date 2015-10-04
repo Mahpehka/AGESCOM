@@ -1,28 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>AGESCOM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
        
-        <div id="top"> </div>
+        
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
+
 
         <div style="height: 100px;"> </div>
         
         
     </body>
+
+            <h:form id='tableForm'>
+                <p:dataTable value="#{fournisseurBean.fournisseurs}" var="fournisseur" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{fournisseur.id}">
+                    <f:facet name="header">
+                        La liste des fournisseurs
+                    </f:facet>
+                    
+                    <p:column headerText="nom" filterBy="#{fournisseur.nom}" sortBy="#{fournisseur.nom}">
+                        <h:outputText value="#{fournisseur.nom}" />  
+                    </p:column> 
+
+                    <p:column headerText="email" filterBy="#{fournisseur.email}">  
+                        <h:outputText value="#{fournisseur.email}"/> 
+                    </p:column>
+                    
+                    <p:column headerText="numero téléphone" filterBy="#{fournisseur.tel}">  
+                        <h:outputText value="#{fournisseur.tel}"/> 
+                    </p:column>
+                    
+                </p:dataTable>
+                <div>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouveau fournisseur" />
+                <p:commandButton type="button" onclick="PF('mf').show()" value="Modifier fournisseur" />
+                <p:commandButton type="button" onclick="PF('dl').show()" value="Supprimer fournisseur" />
+                <p:commandButton type="button" onclick="PF('dl').show()" value="Envoyer un email" />
+                </div>
+            </h:form>
+            <p:dialog id="dialog" header="Nouveau fournisseur" widgetVar="dlg" resizable="false" showEffect="explode" hideEffect="explode" >  
+
+                <h:form>
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Nom:" for="nom" />
+                        <p:inputText id="nom" value="#{fournisseurBean.fournisseur.nom}" title="Nom" required="true" requiredMessage="Le champ nom est obligatoire."/>
+                        <p:outputLabel value="Email:" for="email" />
+                        <p:inputText id="email" value="#{fournisseurBean.fournisseur.email}" title="Email" required="true" requiredMessage="Le champ email est obligatoire."/>
+                        <p:outputLabel value="Tel:" for="tel" />
+                        <p:inputText id="tel" value="#{fournisseurBean.fournisseur.tel}" title="Telephone" required="true" requiredMessage="Le champ telephone est obligatoire."/>
+                    </p:panelGrid>
+                    <p:commandButton type="button" oncomplete ="PF('dlg').hide()" value="Enregistrer" update=":tableForm:table" action="#{fournisseurBean.save()}"/>
+                    <p:commandButton type="reset" value="Effacer" />
+                </h:form>
+
+            </p:dialog>       
+            <p:dialog  header="Modifier fournisseur" widgetVar="mf" resizable="false" showEffect="explode" hideEffect="explode" >  
+                <f:view>
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nom:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                            
+                            <p:outputLabel value="Email:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                            
+                            <p:outputLabel value="Telephone:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.tel}" title="Tel" required="true" requiredMessage="The Tel field is required."/>
+                            
+                            <h:inputHidden value="#{fournisseurBean.fournisseur.id}"/>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+            </p:dialog>        
+            
+    </h:body>
+
 </html>

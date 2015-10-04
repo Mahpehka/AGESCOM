@@ -5,29 +5,50 @@
  */
 package com.mycompany.agestcom.web.beans;
 
+import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.service.IFournisseurService;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.Dependent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import org.primefaces.model.SelectableDataModel;
+
 
 /**
  *
  * @author root
  */
 @ManagedBean
-@Dependent
-public class FournisseurBean {
+@RequestScoped 
+public class FournisseurBean implements SelectableDataModel<Fournisseur>{
 
-     @ManagedProperty(value = "#{IFournisseurService}")
-     IFournisseurService iFournisseurService;
+    @ManagedProperty(value = "#{IFournisseurService}")
+    IFournisseurService iFournisseurService;
     
-     Fournisseur fournisseur = new Fournisseur();
+    private Fournisseur fournisseur = new Fournisseur();
     
-    public FournisseurBean() {
+    private List<Fournisseur> fournisseurs = new LinkedList<Fournisseur>();
+
+    
+    
+    public List<Fournisseur> getFournisseurs() {
+        try {
+            fournisseurs = iFournisseurService.findAllFournisseurs();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fournisseurs;
     }
 
+    public void setFournisseurs(List<Fournisseur> fournisseurs) {
+        this.fournisseurs = fournisseurs;
+    }
+    
     public IFournisseurService getiFournisseurService() {
         return iFournisseurService;
     }
@@ -44,22 +65,40 @@ public class FournisseurBean {
         this.fournisseur = fournisseur;
     }
     
-    public Fournisseur createFournisseur(){
-      return iFournisseurService.createFournisseur(fournisseur);
-    }
-    public  Fournisseur updateFournisseur(){
-      return iFournisseurService.updateFournisseur(fournisseur);
-    }
-    public  Fournisseur findFournisseurById(){
-      return iFournisseurService.findFournisseurById(fournisseur.getId());
+    public void Save(){
+        
+        try {
+            iFournisseurService.createFournisseur(fournisseur);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+
     public List<Fournisseur> findAllFournisseur(){
-      return iFournisseurService.findAllFournisseurs();
+        try {
+            return iFournisseurService.findAllFournisseurs();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Collections.EMPTY_LIST;
     }
+
     
-     public String deleteFournisseur(){
-        iFournisseurService.deleteFournisseur(fournisseur.getId());
-        return "supprimer";
-}
+    @Override
+    public Object getRowKey(Fournisseur t) {
+        return t.getId();
+        }
+
+    public Fournisseur getRowData(String rowKey) {
+        
+        List<Fournisseur> ag = getFournisseurs();
+        for (Fournisseur entre : ag) {
+            if (entre.getId().equals(rowKey)) {
+                return entre;
+            }
+        }
+        return null;
+        }
+    
 }

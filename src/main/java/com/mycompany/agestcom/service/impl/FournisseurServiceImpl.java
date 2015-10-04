@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class FournisseurServiceImpl implements IFournisseurService{
     
-        private IFournisseurDao iFournisseurDao;
+    private IFournisseurDao iFournisseurDao;
 
     public IFournisseurDao getiFournisseurDao() {
         return iFournisseurDao;
@@ -32,7 +32,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
     }
         
     
-    public Fournisseur createFournisseur(Fournisseur fournisseur) {
+    public Fournisseur createFournisseur(Fournisseur fournisseur) throws DataAccessException{
          try {
              return iFournisseurDao.create(fournisseur);
          } catch (DataAccessException ex) {
@@ -42,7 +42,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
          return null;
     }
 
-    public Fournisseur updateFournisseur(Fournisseur fournisseur) {
+    public Fournisseur updateFournisseur(Fournisseur fournisseur) throws DataAccessException{
          try {
              return iFournisseurDao.update(fournisseur);
          } catch (DataAccessException ex) {
@@ -51,7 +51,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
          return null;
     }
 
-    public Fournisseur findFournisseurById(Long id) {
+    public Fournisseur findFournisseurById(Long id) throws DataAccessException{
          try {
              return iFournisseurDao.findById(id);
          } catch (DataAccessException ex) {
@@ -60,7 +60,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
          return null;
     }
 
-    public List<Fournisseur> findAllFournisseurs() {
+    public List<Fournisseur> findAllFournisseurs() throws DataAccessException{
          try {
              return iFournisseurDao.findAll();
          } catch (DataAccessException ex) {
@@ -69,7 +69,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
          return null;
     }
 
-    public void deleteFournisseur(Long id) {
+    public void deleteFournisseur(Long id) throws DataAccessException{
          try {
              Fournisseur fournisseur = iFournisseurDao.findById(id);
              if(fournisseur != null){
@@ -79,5 +79,7 @@ public class FournisseurServiceImpl implements IFournisseurService{
              Logger.getLogger(FournisseurServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+
+    
     
 }
