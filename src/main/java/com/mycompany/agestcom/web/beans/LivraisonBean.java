@@ -8,14 +8,18 @@ package com.mycompany.agestcom.web.beans;
 import com.mycompany.agestcom.data.Livraison;
 import com.mycompany.agestcom.service.ILivraisonService;
 import java.util.List;
-import javax.annotation.ManagedBean;
+
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 /**
  *
  * @author root
  */
+
 @ManagedBean
+@RequestScoped
 public class LivraisonBean {
 
     @ManagedProperty(value = "#{ILivraisonService}")
@@ -40,6 +44,7 @@ public class LivraisonBean {
     public void setLivraison(Livraison livraison) {
         this.livraison = livraison;
     }
+    
     
     
     public Livraison createLivraison(){

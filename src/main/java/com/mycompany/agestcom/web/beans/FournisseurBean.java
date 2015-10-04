@@ -54,7 +54,7 @@ public class FournisseurBean {
       return iFournisseurService.findFournisseurById(fournisseur.getId());
     }
     
-    public List<Fournisseur> findFournisseur(){
+    public List<Fournisseur> findAllFournisseur(){
       return iFournisseurService.findAllFournisseurs();
     }
     
