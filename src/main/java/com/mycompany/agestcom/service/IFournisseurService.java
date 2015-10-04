@@ -5,6 +5,7 @@
  */
 package com.mycompany.agestcom.service;
 
+import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import java.util.List;
 
@@ -14,11 +15,15 @@ import java.util.List;
  */
 public interface IFournisseurService {
     
-    public Fournisseur createFournisseur(Fournisseur fournisseur);
-    public  Fournisseur updateFournisseur( Fournisseur fournisseur);
-    public  Fournisseur findFournisseurById(Long id) ;
-    public List< Fournisseur> findAllFournisseurs();
-    public void deleteFournisseur(Long id);
+    public Fournisseur createFournisseur(Fournisseur fournisseur) throws DataAccessException;
+    
+    public  Fournisseur updateFournisseur( Fournisseur fournisseur) throws DataAccessException;
+    
+    public  Fournisseur findFournisseurById(Long id) throws DataAccessException;
+    
+    public List< Fournisseur> findAllFournisseurs() throws DataAccessException;
+    
+    public void deleteFournisseur(Long id) throws DataAccessException;
     
  
 }

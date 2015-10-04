@@ -1,129 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>AGESCOM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
        
-        <div id="top"> </div>
+        
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
-
-        <div style="height: 100px;"> </div>
-        
-         <f:view>
-
-
-            <h:form>
-                <p:dataTable value="#{FournisseurBean.findAllFournisseur()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{FournisseurBean.Fournisseur}" rowKey="#{item.id}">
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nom"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nom}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Prenom"/>
-                        </f:facet>
-                        <h:outputText value="#{item.prenom}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Email"/>
-                        </f:facet>
-                        <h:outputText value="#{item.email}"/>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-        </f:view>
-        <p:commandButton type="button" onclick="PF('dlg').show()" value="NouveauMateriel" />
-        <p:commandButton  onclick="PF('dl').show()" value="Modifier Materiels" update=":formModifier:panelGModifier"/>
-
-        <p:dialog widgetVar="dlg" header=" Enregistrer un Fournisseur" hideEffect="explode" showEffect="explode" modal="true">
-            <h:form >
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Nom:" for="nom" />
-                    <p:inputText id="nom" value="#{FournisseurBean.fournisseur.nom}" title="nom" />
-                    <p:outputLabel value="N_serie:" for="n_serie" />
-                    <p:inputText id="n_serie" value="#{FournisseurBean.fournisseur.prenom}" title="prenom" />
-                    <p:outputLabel value="Email:" for="email"/>
-                    <p:inputText id="email" value="#{FournisseurBean.Fournisseur.email}" title="email"/>
-                </p:panelGrid>
-                <p:commandButton value="Enregistrer" action="#{FournisseurBean.createFournisseur()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
-            </h:form>
-        </p:dialog>
-
-
-        <p:dialog widgetVar="dl" header=" Modifier un fournisseur" hideEffect="fold" showEffect="explode" resizable="true">
-
-            <h:form id="formModifier">
-                <p:panelGrid columns="2" id="panelGModifier">
-                    <p:outputLabel value="Nom:" for="nom" />
-                    <p:inputText id="nom" value="#{FournisseurBean.founisseur.nom}" title="Nom" />
-                    <p:outputLabel value="Prenom:" for="prenom" />
-                    <p:inputText id="prenom" value="#{FournisseurBean.fournisseur.prenom}" title="Prenom" />
-                    <p:outputLabel value="Email:" for="email"/>
-                    <p:inputText id="email" value="#{FournisseurBean.fournisseur.email}" title="Email" />
-   
-                    <h:inputHidden id="number" value="#{FournisseurBean.fournisseur.setId(id)}" />
-                    <p:commandButton value="Modifier" action="#{FournisseurBean.updateFournisseur()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
-                </p:panelGrid>
-            </h:form>
-        </p:dialog>
-
-        <f:view>
-
-
-           <!-- <h:form id='tableForm'>
-                <p:dataTable value="#{materielBean.findAllMateriel()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materiel}" rowKey="#{item.id}">
+            <h:form id='tableForm'>
+                <p:dataTable value="#{fournisseurBean.fournisseurs}" var="fournisseur" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{fournisseur.id}">
                     <f:facet name="header">
-                        La liste des materiels
+                        La liste des fournisseurs
                     </f:facet>
-                    <p:column filterBy="#{item.designation}" sortBy="{item.designation}">
-                        <f:facet name="header">
-                            <h:outputText value="Designation"/>
-                        </f:facet>
-                        <h:outputText value="#{item.designation}"/>
+                    
+                    <p:column headerText="nom" filterBy="#{fournisseur.nom}" sortBy="#{fournisseur.nom}">
+                        <h:outputText value="#{fournisseur.nom}" />  
+                    </p:column> 
+
+                    <p:column headerText="email" filterBy="#{fournisseur.email}">  
+                        <h:outputText value="#{fournisseur.email}"/> 
                     </p:column>
-                    <p:column filterBy="#{item.n_serie}" sortBy="#{item.n_serie}">
-                        <f:facet name="header">
-                            <h:outputText value="N_serie"/>
-                        </f:facet>
-                        <h:outputText value="#{item.n_serie}"/>
+                    
+                    <p:column headerText="numero téléphone" filterBy="#{fournisseur.tel}">  
+                        <h:outputText value="#{fournisseur.tel}"/> 
                     </p:column>
-                    <p:column filterBy="#{item.type}" sortBy="#{item.type}">
-                        <f:facet name="header">
-                            <h:outputText value="type"/>
-                        </f:facet>
-                        <h:outputText value="#{item.type}"/>
-                    </p:column>
+                    
                 </p:dataTable>
-                <p:commandButton type="button" onclick="PF('dlg').show()" value="NouveauMateriel" />
-                <p:commandButton  onclick="PF('dl').show()" value="Modifier Materiels" update=":formModifier:panelGModifier"/>
+                <div>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouveau fournisseur" />
+                <p:commandButton type="button" onclick="PF('mf').show()" value="Modifier fournisseur" />
+                <p:commandButton type="button" onclick="PF('dl').show()" value="Supprimer fournisseur" />
+                <p:commandButton type="button" onclick="PF('dl').show()" value="Envoyer un email" />
+                </div>
+            </h:form>
+            <p:dialog id="dialog" header="Nouveau fournisseur" widgetVar="dlg" resizable="false" showEffect="explode" hideEffect="explode" >  
 
-            </h:form>-->
+                <h:form>
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Nom:" for="nom" />
+                        <p:inputText id="nom" value="#{fournisseurBean.fournisseur.nom}" title="Nom" required="true" requiredMessage="Le champ nom est obligatoire."/>
+                        <p:outputLabel value="Email:" for="email" />
+                        <p:inputText id="email" value="#{fournisseurBean.fournisseur.email}" title="Email" required="true" requiredMessage="Le champ email est obligatoire."/>
+                        <p:outputLabel value="Tel:" for="tel" />
+                        <p:inputText id="tel" value="#{fournisseurBean.fournisseur.tel}" title="Telephone" required="true" requiredMessage="Le champ telephone est obligatoire."/>
+                    </p:panelGrid>
+                    <p:commandButton type="button" oncomplete ="PF('dlg').hide()" value="Enregistrer" update=":tableForm:table" action="#{fournisseurBean.save()}"/>
+                    <p:commandButton type="reset" value="Effacer" />
+                </h:form>
 
-
-        </f:view>
-         
-    </body>
+            </p:dialog>       
+            <p:dialog  header="Modifier fournisseur" widgetVar="mf" resizable="false" showEffect="explode" hideEffect="explode" >  
+                <f:view>
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nom:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                            
+                            <p:outputLabel value="Email:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                            
+                            <p:outputLabel value="Telephone:"/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.tel}" title="Tel" required="true" requiredMessage="The Tel field is required."/>
+                            
+                            <h:inputHidden value="#{fournisseurBean.fournisseur.id}"/>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+            </p:dialog>        
+            
+    </h:body>
 </html>
