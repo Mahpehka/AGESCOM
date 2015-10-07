@@ -8,9 +8,8 @@ package com.mycompany.agestcom.web.beans;
 import com.mycompany.agestcom.data.Cession;
 import com.mycompany.agestcom.service.ICessionService;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 /**

@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -30,9 +31,9 @@ public class Livraison implements  Serializable{
     @Column( nullable = false)
     private  Long N_bon_livraison;
     @Column( nullable = false)
-    private String status_livraison;
-    @OneToMany(mappedBy = "livraison")
-    private List<Commande> commandes;
+    private int status_livraison;
+    @ManyToOne
+    private Commande commande;
     @OneToMany(mappedBy ="livraison")
     private List<Fournisseur> fournisseurs;
    // private Commande commande;
@@ -53,13 +54,15 @@ public class Livraison implements  Serializable{
         this.N_bon_livraison = N_bon_livraison;
     }
 
-    public String getStatus_livraison() {
+    public int getStatus_livraison() {
         return status_livraison;
     }
 
-    public void setStatus_livraison(String status_livraison) {
+    public void setStatus_livraison(int status_livraison) {
         this.status_livraison = status_livraison;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -69,13 +72,15 @@ public class Livraison implements  Serializable{
         this.id = id;
     }
 
-    public List<Commande> getCommandes() {
-        return commandes;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
+
+  
 
     public List<Fournisseur> getFournisseurs() {
         return fournisseurs;

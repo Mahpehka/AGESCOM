@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>AGESCOM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 20px; "> </div>
+        <f:view>
+
+         
+           <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle demande" hideEffect="explode" showEffect="explode" modal="true">
+
+            <h:form>
+                <h1><h:outputText value="Enregistrer une demande"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Relation:" for="relation" />
+                    <p:inputText id="relation" value="#{demandeBean.demande.relation}" title="Relation" />
+                    <p:outputLabel value="Quantite:" for="quantite" />
+                    <p:inputText id="quantite" value="#{demandeBean.demande.quantite}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                    <p:outputLabel value="Personne:" for="personne" />
+                    <p:selectOneMenu id="personne" value="#{demandeBean.demande.personne}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                     <p:outputLabel value="Materiel:" for="materiel" />
+                     <p:selectOneMenu id="materiel" value="#{demandeBean.demande.materiel}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton value="Enregistrer" action="#{demandeBean.createDemande()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+            </h:form>
+        </p:dialog>
+
+         <p:dialog widgetVar="dl" header=" Modifier une demande" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifier">
+                <p:panelGrid columns="2" id="panelGModifier">
+                    <p:outputLabel value="Relation:" for="relation" />
+                    <p:inputText id="relation" value="#{demandeBean.demande.relation}" title="Relation" />
+                    <p:outputLabel value="Quantite:" for="quantite" />
+                    <p:inputText id="quantite" value="#{demandeBean.demande.quantite}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                    <p:outputLabel value="Personne:" for="personne" />
+                    <p:selectOneMenu id="personne" value="#{demandeBean.demande.personne}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Materiel:" for="materiel" />
+                    <p:selectOneMenu id="materiel" value="#{demandeBean.demande.materiel}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Modifier" action="#{demandeBean.updateDemande()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        
+        </f:view>
+         <f:view>
+      
+            <h:form id='tableForm'>
+                <p:dataTable value="#{demandeBean.findAllDemande()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{demandeBean.demande}" rowKey="#{item.id}">
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Relation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.relation}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date"/>
+                        </f:facet>
+                        <h:outputText value="#{item.date}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantite"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantite}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Personne"/>
+                        </f:facet>
+                        <h:outputText value="#{item.personne}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Materiel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.materiel}"/>
+                    </p:column>
+                 </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Demande" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Demande" update=":formModifier:panelGModifier"/>
+
+            </h:form>
+        </f:view>
+
+    </body>
+</html>

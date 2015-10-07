@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <f:view>
+
+            <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle cession" hideEffect="explode" showEffect="explode" modal="true">
+
+                <h:form>
+                    <h1><h:outputText value="Enregistrer une cession"/></h1>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Description:" for="description" />
+                        <p:inputText id="description" value="#{cessionBean.cession.description}" title="Description" />
+                        <p:outputLabel value="Materiel:" for="materiel" />
+                        <p:selectOneMenu id="materiel" value="#{cessionBean.cession.materiel}" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{fixme}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="N_orde_sortie:" for="n_orde_sortie" />
+                        <p:inputText id="n_orde_sortie" value="#{cessionBean.cession.n_orde_sortie}" title="N_orde_sortie" />
+                    </p:panelGrid>
+                    <p:commandButton value="Enregistrer" action="#{cessionBean.createCession()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+                </h:form>
+            </p:dialog>
+            <p:dialog widgetVar="dl" header=" Modifier une cession" hideEffect="fold" showEffect="explode" resizable="true">
+
+                <h:form id="formModifier">
+                    <p:panelGrid columns="2" id="panelGModifier">
+                        <p:outputLabel value="Description:" for="description" />
+                        <p:inputText id="description" value="#{cessionBean.cession.description}" title="Description" />
+                        <p:outputLabel value="Materiel:" for="materiel" />
+                        <p:selectOneMenu id="materiel" value="#{cessionBean.cession.materiel}" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{fixme}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="N_orde_sortie:" for="n_orde_sortie" />
+                        <p:inputText id="n_orde_sortie" value="#{cessionBean.cession.n_orde_sortie}" title="N_orde_sortie" />
+
+                        <p:commandButton value="Modifier" action="#{cessionBean.updateCession()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                    </p:panelGrid>
+                </h:form>
+        </f:view>
+
+
+        <f:view>
+            <h:form id='tableForm'>
+                <p:dataTable value="#{cessionBean.findAllCession()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{cessionBean.cession}">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Materiel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.materiel}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="N_orde_sortie"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_orde_sortie}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Cession" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Cession" update=":formModifier:panelGModifier"/>
+
+            </h:form>
+        </f:view>
+
+    </body>
+</html>

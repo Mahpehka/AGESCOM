@@ -7,11 +7,9 @@ package com.mycompany.agestcom.web.beans;
 
 import com.mycompany.agestcom.data.Demande;
 import com.mycompany.agestcom.service.IDemandeService;
-import com.mycompany.agestcom.service.IFournisseurService;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 /**

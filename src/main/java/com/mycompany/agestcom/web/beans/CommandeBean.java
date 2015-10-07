@@ -9,6 +9,7 @@ import com.mycompany.agestcom.data.Commande;
 import com.mycompany.agestcom.data.Livraison;
 import com.mycompany.agestcom.service.ICommandeService;
 import com.mycompany.agestcom.service.ILivraisonService;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -38,6 +39,7 @@ public class CommandeBean {
     private List<Livraison> listeLivraisons;
     
      private Date date_commande;
+     private  List listes;
     
     Long idlivraison;
     private Long tab [];
@@ -106,10 +108,38 @@ public class CommandeBean {
     public void setCommandeChoisi(Commande commandeChoisi) {
         this.commandeChoisi = commandeChoisi;
     }
+
+    public List getListes() {
+        return listes;
+    }
+
+    public void setListes(List listes) {
+        this.listes = listes;
+    }
+
+    public void setListeLivraisons(List<Livraison> listeLivraisons) {
+        this.listeLivraisons = listeLivraisons;
+    }
+    
+    
     
      public Commande createCommande(){
       commande.setDate_commande(new Date());
-      return iCommandeService.createCommande(commande);
+      listes=new  ArrayList<Livraison>();
+        for(int i = 0; i < tab.length; i++) {
+                Long t = tab[i];
+                Livraison liv;
+                System.out.println("-----------" + t);
+                liv = iLivraisonService.findLivraisonById(t);
+                liv.setStatus_livraison(1);
+                iLivraisonService.updateLivraison(liv);
+                listes.add(liv);
+            }
+        
+        commande.setLivraisons(listes);
+       return iCommandeService.createCommande(commande);
+      
+     
     }
     public  Commande updateCommande(){
       commande.setDate_commande(new Date());
@@ -124,6 +154,15 @@ public class CommandeBean {
     }
     
     public List<Livraison> getListeLivraisons() throws ServiceException {
-        return iLivraisonService.findAllLivraison();
+        List<Livraison> livrer = new ArrayList<Livraison>();
+        List<Livraison> listess = iLivraisonService.findAllLivraison();
+        for (Livraison listess1 : listess) {
+            if(listess1.getStatus_livraison()==0){
+                livrer.add(listess1);
+            }
+        }
+        return livrer;
+        
 }
 }
+

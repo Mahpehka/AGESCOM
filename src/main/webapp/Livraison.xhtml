@@ -10,23 +10,69 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
+    <h:head>
         <title>AGESCOM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
          <div id="top"> </div>
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
 
         <div style="height: 20px; "> </div>
-
+        
+        
+      
         <f:view>
 
+         
+           <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle livraison" hideEffect="explode" showEffect="explode" modal="true">
+
             <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <p:dataTable value="#{livraisonBean.findAllLivraison }" var="item">
+                <h1><h:outputText value="Enregistrer une livraison"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="N_bon_livraison:" for="n_bon_livraison" />
+                    <p:inputText id="n_bon_livraison" value="#{livraisonBean.livraison.n_bon_livraison}" title="N_bon_livraison" />
+                   
+                    <p:outputLabel value="Statut_livraison:" for="status_livraison" />    
+                    <p:inputText id="status_livraison" value="#{livraisonBean.livraison.status_livraison}" title="N_ordre_entree" />
+                    
+                </p:panelGrid>
+                <p:commandButton value="Enregistrer" action="#{livraisonBean.createLivraison()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+            </h:form>
+        </p:dialog>
+
+         <p:dialog widgetVar="dl" header=" Modifier une livraison" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifier">
+                <p:panelGrid columns="2" id="panelGModifier">
+                    <p:outputLabel value="N_bon_livraison:" for="n_bon_livraison" />
+                    <p:inputText id="n_bon_livraison" value="#{livraisonBean.livraison.n_bon_livraison}" title="N_bon_livraison" />
+                    
+                    <p:outputLabel value="Status_livraison:" />
+                    <p:inputText value="#{livraisonBean.livraison.status_livraison}"/>
+                    <p:outputLabel value="Date_livraison"/>
+                    <p:calendar value="#{livraisonBean.date}" mode="popup"
+                                    showOn="button" />
+                    <p:commandButton value="Modifier" action="#{livraisonBean.updateLivraison()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        
+        </f:view>
+         <f:view>
+      
+            <h:form id='tableForm'>
+                <p:dataTable value="#{livraisonBean.findAllLivraison()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{livraisonBean.livraison}" rowKey="#{item.id}">
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="N_bon_livraison"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_bon_livraison}"/>
+                    </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Date_livraison"/>
@@ -37,25 +83,17 @@ and open the template in the editor.
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="N_bon_livraison"/>
-                        </f:facet>
-                        <h:outputText value="#{item.n_bon_livraison}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
                             <h:outputText value="Status_livraison"/>
                         </f:facet>
                         <h:outputText value="#{item.status_livraison}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                </p:dataTable>
+                    
+                 </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Livraison" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Commande" update=":formModifier:panelGModifier"/>
+
             </h:form>
         </f:view>
 
-    </body>
+    </h:body>
 </html>

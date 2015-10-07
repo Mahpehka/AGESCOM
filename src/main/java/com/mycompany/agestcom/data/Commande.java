@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -35,8 +36,8 @@ public class Commande implements  Serializable{
     private Long N_ordre_entree;
     @Column( nullable = false)
     private int quantite;
-    @ManyToOne
-    private Livraison livraison;
+    @OneToMany
+    private List<Livraison> livraisons;
 
     public Long getId() {
         return id;
@@ -83,20 +84,14 @@ public class Commande implements  Serializable{
         this.quantite = quantite;
     }
 
-    public Livraison getLivraison() {
-        return livraison;
+    public List<Livraison> getLivraisons() {
+        return livraisons;
     }
 
-    public void setLivraison(Livraison livraison) {
-        this.livraison = livraison;
+    public void setLivraisons(List<Livraison> livraisons) {
+        this.livraisons = livraisons;
     }
 
-   
-    
-
-
-    
-    
-    
+     
     
 }
