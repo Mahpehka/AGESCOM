@@ -91,7 +91,6 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         }
     }
     
-<<<<<<< HEAD
     public void update(){
         try {
             iFournisseurService.updateFournisseur(fournisseur);
@@ -100,7 +99,6 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         }
     }
     
-=======
 
     public List<Fournisseur> findAllFournisseur(){
         try {
@@ -111,7 +109,6 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         return Collections.EMPTY_LIST;
     }
 
->>>>>>> b34347c3983ca268bee4f4323fb93b7312ea5dee
     
     @Override
     public Object getRowKey(Fournisseur t) {
