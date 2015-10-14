@@ -9,7 +9,6 @@ import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.dao.IFiche_detenteurDao;
 import com.mycompany.agestcom.data.Fiche_detenteur;
 import com.mycompany.agestcom.service.IFiche_detenteurService;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

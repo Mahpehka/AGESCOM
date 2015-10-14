@@ -36,6 +36,7 @@ public class LivraisonServiceImpl implements ILivraisonService{
     
     public Livraison createLivraison(Livraison livraison) {
         try {
+            livraison.setStatus_livraison(0);
             return iLivraisonDao.create(livraison);
         } catch (DataAccessException ex) {
             Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,9 +44,9 @@ public class LivraisonServiceImpl implements ILivraisonService{
         return null;
     }
 
-    public Livraison updateLivraison(Livraison Livraison) {
+    public Livraison updateLivraison(Livraison livraison) {
         try {
-            return iLivraisonDao.update(Livraison);
+            return iLivraisonDao.update(livraison);
         } catch (DataAccessException ex) {
             Logger.getLogger(LivraisonServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 package com.mycompany.agestcom.data;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,31 +26,12 @@ public class Fiche_detenteur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column( nullable = false)
-    private  Long N_serie;
-    @Column( nullable = false)
-    private String designation_materiel;
     @OneToOne
     private Personne personne;
+    @OneToMany
+    private List<Materiel> materiels;
     @ManyToOne
     private Materiel materiel;
-
-    
-    public Long getN_serie() {
-        return N_serie;
-    }
-
-    public void setN_serie(Long N_serie) {
-        this.N_serie = N_serie;
-    }
-
-    public String getDesignation_materiel() {
-        return designation_materiel;
-    }
-
-    public void setDesignation_materiel(String designation_materiel) {
-        this.designation_materiel = designation_materiel;
-    }
 
     public Personne getPersonne() {
         return personne;
@@ -58,13 +41,15 @@ public class Fiche_detenteur implements Serializable {
         this.personne = personne;
     }
 
-    public Materiel getMateriel() {
-        return materiel;
+    public List<Materiel> getMateriels() {
+        return materiels;
     }
 
-    public void setMateriel(Materiel materiel) {
-        this.materiel = materiel;
+    public void setMateriels(List<Materiel> materiels) {
+        this.materiels = materiels;
     }
+
+   
 
     public Long getId() {
         return id;

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+     
+        <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 10px; "> </div>
+       
+        <f:view>
+
+
+
+        <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle sortie" hideEffect="explode" showEffect="explode" modal="true">
+
+            <h:form>
+                <h1><h:outputText value="Enregistrer une sortie "/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Description:" for="description" />
+                    <p:inputText id="description" value="#{sortieBean.sortie.description}" title="Description" />
+                    <p:outputLabel value="TypeSortie:"/>
+                    <p:selectOneMenu value="#{sortieBean.sortie.typesortie}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                        <f:selectItems var="cust" value="#{sortieBean.typeSortie}"    itemLabelEscaped="true" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Materiels:"/> 
+                    <p:selectCheckboxMenu value="#{sortieBean.tab}" label="Listes des materiels"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                        <f:selectItems var ="fin" value="#{sortieBean.listeMateriels}" itemLabel="#{fin.designation}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                        </p:selectCheckboxMenu>
+                </p:panelGrid>
+                    <p:commandButton value="Enregistrer" action="#{sortieBean.createSortie()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+            </h:form>
+        </p:dialog>
+
+         <p:dialog widgetVar="dl" header=" Modifier une sortie" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifier">
+                <p:panelGrid columns="2" id="panelGModifier">
+                    <p:outputLabel value="Description:" for="description" />
+                    <p:inputText id="description" value="#{sortieBean.sortie.description}" title="Description" />
+                    <p:outputLabel value="TypeSortie:"/>
+                    <p:selectOneMenu value="#{sortieBean.sortie.typesortie}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                        <f:selectItems var="cust" value="#{sortieBean.typeSortie}"    itemLabelEscaped="true" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Materiels:" for="materiels" />
+                    <p:selectOneMenu id="materiels" value="#{sortieBean.sortie.materiels}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <h:inputHidden id="number" value="#{sortieBean.sortie.id}" />
+                    <p:commandButton value="Modifier" action="#{sortieBean.updateSortie()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        </f:view>
+
+
+        <f:view>
+
+            <h:form id='tableForm'>
+                <p:dataTable value="#{sortieBean.findAllsortie()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{sortieBean.sortie}" rowKey="#{item.id}">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Typesortie"/>
+                        </f:facet>
+                        <h:outputText value="#{item.typesortie}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Materiel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.materiels}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Sortie" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Sortie" update=":formModifier:panelGModifier"/>
+
+            </h:form>
+        </f:view>
+        
+    </body>
+</html>

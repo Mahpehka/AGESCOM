@@ -12,9 +12,9 @@ import com.mycompany.agestcom.service.ILivraisonService;
 import java.util.Date;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
@@ -31,14 +31,14 @@ public class LivraisonBean {
     private Long tab[];
 
     private List<Fournisseur> listeFournisseurs;
-    private List<Commande> listeCommandes;
+   // private List<Commande> listeCommandes;
     Long idfournisseur;
-    Long idcommande;
+   // Long idcommande;
     private Date date;
     
     public LivraisonBean() {
         idfournisseur= 0L;
-        idcommande= 0L;
+       // idcommande= 0L;
         tab= new Long[5];
          
     }
@@ -84,13 +84,13 @@ public class LivraisonBean {
         this.listeFournisseurs = listeFournisseurs;
     }
 
-    public List<Commande> getListeCommandes() {
-        return listeCommandes;
-    }
-
-    public void setListeCommandes(List<Commande> listeCommandes) {
-        this.listeCommandes = listeCommandes;
-    }
+//    public List<Commande> getListeCommandes() {
+//        return listeCommandes;
+//    }
+//
+//    public void setListeCommandes(List<Commande> listeCommandes) {
+//        this.listeCommandes = listeCommandes;
+//    }
 
     public Long getIdfournisseur() {
         return idfournisseur;
@@ -99,26 +99,29 @@ public class LivraisonBean {
     public void setIdfournisseur(Long idfournisseur) {
         this.idfournisseur = idfournisseur;
     }
-
-    public Long getIdcommande() {
-        return idcommande;
+//
+//    public Long getIdcommande() {
+//        return idcommande;
+//    }
+//
+//    public void setIdcommande(Long idcommande) {
+//        this.idcommande = idcommande;
+//    }
+    
+    public void zozo(){
+        System.out.println("I'm coming home !!!!!!");
     }
-
-    public void setIdcommande(Long idcommande) {
-        this.idcommande = idcommande;
-    }
     
-    
-    
-    public Livraison createLivraison(){
+    public void createLivraison(){
       livraison.setDate_livraison(new Date());
-      livraison.setStatus_livraison(0);
-      return iLivraisonService.createLivraison(livraison);
+      System.out.println("bonjour............." +livraison);
+       iLivraisonService.createLivraison(livraison);
+     
     }
-    public Livraison updateLivraison(){
+    public void updateLivraison(){
       livraison.setStatus_livraison(1);
       livraison.setDate_livraison(new Date());  
-      return iLivraisonService.updateLivraison(livraison);
+       iLivraisonService.updateLivraison(livraison);
     }
     public  Livraison findFLivraisonById(){
       return iLivraisonService.findLivraisonById(livraison.getId());

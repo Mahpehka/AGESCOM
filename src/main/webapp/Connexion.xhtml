@@ -5,62 +5,33 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    
-     <f:view contentType="text/html" >
 
         <h:head>
             <title> login</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <h:outputStylesheet library="css" name="login.css"/>
+            <link rel="StyleSheet" href="connexion.css" type="text/css"/>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         </h:head>
 
-        <h:body >
-            <div class="main">
-                <form name='f'  method='POST' id="form1">
-                    <h1><span>AGESTCOM</span>  </h1>
+        <h:body>
+            <div id="main">
 
-                    <div class="inset">
-                        <p>
-                            <h:outputLabel id="name" for="nom"   value="Nom d'utilisateur" />
-                            <input type="text" placeholder=""  required="le nom est obligatoire" />
-                        </p>
-                        <p>
-                            <h:outputLabel id="pwd" for="passwd" value="Mot de passe" />
-                            <input type="password" placeholder=""  required="le mot de passe est obligatoire"/>
-                        </p>
-                        <p>
-                            <input type="checkbox" />
-                            <label for="remember">Garder ma session ouverte</label>
-                        </p>
-                    </div>
+                <h1><span>AGESTCOM</span></h1>
 
-                    <p class="p-container">
-                        <h:form>
-                            <p:commandButton  value="Se connecter" action="#{ConnexionBean.seconnecter()}" />
-                        </h:form>
-                    </p>
-                </form>
-            </div>  
+                    <h:form >
+                               
+                        <p:panelGrid columns="2" style="text-align: center;">
 
+                            <p:outputLabel value="Login" />
+                            <p:inputText id="login" value="#{connexionBean.login}" required="true" requiredMessage="The Login field is required."/>
+                            <p:outputLabel value="Password" />
+                            <p:password id="password" value="#{connexionBean.password}" required="true" requiredMessage="The Password field is required."/>
+
+                        </p:panelGrid>
+                        <p:commandButton  value="Se connecter" action="#{connexionBean.seconnecter()}" />
+                    </h:form>
+            </div>
         </h:body>
-    </f:view>
-    <!--<h:head>
-        <title>mon appli</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <div id="body">
-       
-            <div id="top"> </div>
-            <div id="menu">
-                <ui:include src="menu.xhtml"/>
-            </div>
-            <div id="content" class="center_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
-        </div>
-    </h:body> -->
 </html>
  

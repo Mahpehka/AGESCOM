@@ -9,51 +9,22 @@
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
     </application>
-     <!-- <navigation-rule>
-        <from-view-id>/Matetiel.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>save</from-outcome>
-            <to-view-id>Materiel.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>update</from-outcome>
-            <to-view-id>Materiel.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
    
     <navigation-rule>
         <from-view-id>/*</from-view-id>
         <navigation-case>
-            <from-outcome>accueil</from-outcome>
-            <to-view-id>/menu.xhtml</to-view-id>
-            <redirect>/menu.xhtml</redirect>
+            <from-outcome>listes</from-outcome>
+            <to-view-id>/ListeMako.xhtml</to-view-id>
+            <redirect>/ListeMako.xhtml</redirect>
         </navigation-case>
     </navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/*</from-view-id>
-        <navigation-case>
-            <from-outcome>Fournisseur</from-outcome>
-            <to-view-id>/Fournisseur.xhtml</to-view-id>
-            <redirect>/Fournisseur.xhtml</redirect>
+     <navigation-rule>
+       <navigation-case>
+            <from-outcome>demande</from-outcome>
+            <to-view-id>/Demandes.xhtml</to-view-id>
+            <redirect>/Demande.xhtml</redirect>
         </navigation-case>
     </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/*</from-view-id>
-        <navigation-case>
-            <from-outcome>Personne</from-outcome>
-            <to-view-id>/Personne.xhtml</to-view-id>
-            <redirect>/Personne.xhtml</redirect>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/*</from-view-id>
-        <navigation-case>
-            <from-outcome>Connexion</from-outcome>
-            <to-view-id>/Connexion.xhtml</to-view-id>
-            <redirect>/Connexion.xhtml</redirect>
-        </navigation-case>
-    </navigation-rule>-->
     
 </faces-config>

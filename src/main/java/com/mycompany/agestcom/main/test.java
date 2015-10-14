@@ -3,7 +3,9 @@ package com.mycompany.agestcom.main;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.data.Livraison;
+import com.mycompany.agestcom.data.Personne;
 import com.mycompany.agestcom.service.IFournisseurService;
+import com.mycompany.agestcom.service.IPersonneService;
 import com.mycompany.agestcom.service.ILivraisonService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -48,13 +50,20 @@ public class test {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring.xml");
         ILivraisonService service = ctx.getBean("ILivraisonService", ILivraisonService.class);
         IFournisseurService servic = ctx.getBean("IFournisseurService", IFournisseurService.class);
-     
+        IPersonneService ser = ctx.getBean("IPersonneService", IPersonneService.class);
+
         
-        Fournisseur four =  new Fournisseur();
-        Livraison liv = service.findLivraisonById(1L);
-        four.setEmail("mpk@yahoo.fr");
-        four.setNom("mimi");
-        four.setTel("670041407");
+        Personne per=new Personne();
+        per.setLogin("mpk");
+        per.setMatricule("12XO3");
+        per.setNom("kodjoe");
+        per.setPassword("rien");
+        ser.createPersonne(per);
+//        Fournisseur four =  new Fournisseur();
+//        Livraison liv = service.findLivraisonById(1L);
+//        four.setEmail("mpk@yahoo.fr");
+//        four.setNom("mimi");
+//        four.setTel("670041407");
         
 //        List<Livraison> list = new ArrayList<Livraison>();
 //        Livraison livraison= new Livraison();
@@ -64,8 +73,8 @@ public class test {
 //        service.createLivraison(livraison);
 //        list.add(livraison);
 
-         servic.createFournisseur(four);
-         System.out.println("" + four.getNom());
+         //servic.createFournisseur(four);
+         System.out.println("" + ser.findAllPersonne().size());
        
         
     }

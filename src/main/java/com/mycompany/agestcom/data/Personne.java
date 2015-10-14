@@ -14,13 +14,21 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author root
  */
 @Entity
-public class Personne implements Serializable{
+
+@NamedQueries({
+@NamedQuery(name = "Personne.findByLogin",query = " SELECT p from Personne p   WHERE p.login = :param"),
+@NamedQuery(name = "Personne.findByPassword",query = " SELECT p from Personne p   WHERE p.password = :param"),
+})
+    public class Personne implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
@@ -30,18 +38,18 @@ public class Personne implements Serializable{
     private String nom;
     @Column( nullable = false)
     private String Prenom;
-    @Column( nullable = false)
-    private  String fonction;
+    @Column( nullable = true)
+    private  Fonction fonction;
     @Column( nullable = false)
     private Division division;
-    @Column( nullable = false)
+    @Column( nullable = false, unique = true)
     private  String login;
-    @Column( nullable = false)
+    @Column( nullable = false, unique = true)
     private   String password;
     @OneToOne(mappedBy = "personne")
     private Fiche_detenteur fiche_detenteur;
-    @ManyToOne
-    private Demande demande;
+    @OneToMany(mappedBy = "personne")
+    private List<Demande> demandes;
     public Long getId() {
         return id;
     }
@@ -74,14 +82,15 @@ public class Personne implements Serializable{
         this.Prenom = Prenom;
     }
 
-    public String getFonction() {
+    public Fonction getFonction() {
         return fonction;
     }
 
-    public void setFonction(String fonction) {
+    public void setFonction(Fonction fonction) {
         this.fonction = fonction;
     }
 
+   
     public Division getDivision() {
         return division;
     }
@@ -89,6 +98,9 @@ public class Personne implements Serializable{
     public void setDivision(Division division) {
         this.division = division;
     }
+
+   
+    
 
 
     public String getLogin() {
@@ -115,13 +127,18 @@ public class Personne implements Serializable{
         this.fiche_detenteur = fiche_detenteur;
     }
 
-    public Demande getDemande() {
-        return demande;
+    public List<Demande> getDemandes() {
+        return demandes;
     }
 
-    public void setDemande(Demande demande) {
-        this.demande = demande;
+    public void setDemandes(List<Demande> demandes) {
+        this.demandes = demandes;
     }
+
+   
+   
+
+  
 
    
     

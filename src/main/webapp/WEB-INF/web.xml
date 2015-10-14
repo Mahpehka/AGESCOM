@@ -19,7 +19,7 @@
     </session-config>
     <welcome-file-list>        
         <welcome-file>
-            faces/Materiel.xhtml
+            faces/Connexion.xhtml
         </welcome-file>
     </welcome-file-list>
     <listener>        

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>AGESCOM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+
+        <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 10px;"> </div>
+
+        <f:view>
+
+
+            <h:form id='tableForm'>
+                <p:dataTable value="#{fiche_detenteurBean.filtreur()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{materielBean.materiel}" rowKey="#{item.id}">
+                    <f:facet name="header">
+                        La liste des materiels
+                    </f:facet>
+                    <p:column filterBy="#{item.designation}" sortBy="{item.designation}">
+                        <f:facet name="header">
+                            <h:outputText value="Designation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.designation}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.n_serie}" sortBy="#{item.n_serie}">
+                        <f:facet name="header">
+                            <h:outputText value="N_serie"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_serie}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.type}" sortBy="#{item.type}">
+                        <f:facet name="header">
+                            <h:outputText value="type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                    </p:column>
+                </p:dataTable>        
+
+            </h:form>
+
+
+        </f:view>
+        
+
+    </h:body>
+</html>

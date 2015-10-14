@@ -10,6 +10,7 @@ import com.mycompany.agestcom.data.Livraison;
 import com.mycompany.agestcom.service.ICommandeService;
 import com.mycompany.agestcom.service.ILivraisonService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -123,9 +124,11 @@ public class CommandeBean {
     
     
     
-     public Commande createCommande(){
+     public void createCommande(){
       commande.setDate_commande(new Date());
       listes=new  ArrayList<Livraison>();
+         System.out.println("La liste des ids");
+         System.out.println(Arrays.toString(tab));
         for(int i = 0; i < tab.length; i++) {
                 Long t = tab[i];
                 Livraison liv;
@@ -137,7 +140,7 @@ public class CommandeBean {
             }
         
         commande.setLivraisons(listes);
-       return iCommandeService.createCommande(commande);
+        iCommandeService.createCommande(commande);
       
      
     }

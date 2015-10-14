@@ -5,6 +5,7 @@
  */
 package com.mycompany.agestcom.dao;
 
+import com.douwe.generic.dao.DataAccessException;
 import com.douwe.generic.dao.IDao;
 import com.mycompany.agestcom.data.Personne;
 import java.io.Serializable;
@@ -14,5 +15,7 @@ import java.io.Serializable;
  * @author root
  */
 public interface IPersonneDao extends IDao<Personne, Long>{
-    
+
+       public Personne findByLogin(String s) throws DataAccessException;
+       public  Personne findByPassword (String s) throws DataAccessException;
 }

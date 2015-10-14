@@ -1,0 +1,14 @@
+body{
+    background:cornsilk;
+    
+}
+
+#main{
+    background: skyblue;
+    width: 380px;
+    margin: auto;
+    border: solid black;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 150px;
+}

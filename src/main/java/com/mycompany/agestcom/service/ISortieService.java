@@ -5,18 +5,18 @@
  */
 package com.mycompany.agestcom.service;
 
-import com.mycompany.agestcom.data.Reforme;
+import com.mycompany.agestcom.data.Sortie;
 import java.util.List;
 
 /**
  *
  * @author root
  */
-public interface IReformeService {
+public interface ISortieService {
     
-    public Reforme createReforme(Reforme reforme);
-    public  Reforme updateReforme(Reforme reforme);
-    public List< Reforme> findAllReforme();
-    public void deleteReforme(Long id);
+    public Sortie createSortie(Sortie sortie) ;
+    public  Sortie updateSortie(Sortie sortie) ;
+    public  Sortie findSortieById(Long id);
+    public List< Sortie> findAllSortie();
     
 }

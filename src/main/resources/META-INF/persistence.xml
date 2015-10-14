@@ -2,7 +2,6 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="zozoPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>com.mycompany.agestcom.data.Cession</class>
     <class>com.mycompany.agestcom.data.Commande</class>
     <class>com.mycompany.agestcom.data.Demande</class>
     <class>com.mycompany.agestcom.data.Fiche_detenteur</class>
@@ -10,7 +9,6 @@
     <class>com.mycompany.agestcom.data.Personne</class>
     <class>com.mycompany.agestcom.data.Fournisseur</class>
     <class>com.mycompany.agestcom.data.Livraison</class>
-    <class>com.mycompany.agestcom.data.Reforme</class>
     <class>com.mycompany.agestcom.data.Sortie</class>
     <properties>
       <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tata?zeroDateTimeBehavior=convertToNull"/>

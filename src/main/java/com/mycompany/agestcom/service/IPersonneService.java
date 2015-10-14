@@ -19,5 +19,6 @@ public interface IPersonneService {
     public  Personne findPersonneById(Long id);
     public List< Personne> findAllPersonne();
     public void deletePersonne(Long id);
-    
+    public Personne findByLogin(String s) throws ServiceException;
+    public Personne findByPassword(String s) throws ServiceException;
 }

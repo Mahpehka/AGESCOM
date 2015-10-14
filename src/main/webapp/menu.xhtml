@@ -5,25 +5,28 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     
-    <head>
+    <h:head>
         <title>AGESCOM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-    <h:form>
+        <link rel="StyleSheet" href="agescom.css" type="text/css"/>
+    </h:head>
+    <h:body>
+     <h:form  class="header">
+           
+        </h:form>
+    <h:form id = 'menu1'>
         <p:tabMenu>
             <p:menuitem value="Accueil" action="#{orientationBean.accueil()}" icon="ui-icon-home"/>
             <p:menuitem value="Materiel" url="Materiel.xhtml" />
             <p:menuitem value="Fournisseur" url="Fournisseur.xhtml" />
             <p:menuitem value="Commande" url="Commande.xhtml"/>
-            <p:menuitem value="Reforme" url="Reforme.xhtml"/>
-            <p:menuitem value="Cession" url="Cession.xhtml"/>
             <p:menuitem value="Demande" url="Demande.xhtml"/>
             <p:menuitem value="Fiche" url="Fiche_detenteur.xhtml"/>
             <p:menuitem value="Personne" url="Personne.xhtml"/>
             <p:menuitem value="Livraison" url="Livraison.xhtml"/>
+            <p:menuitem value="Sortie" url="Sortie.xhtml"/>
         </p:tabMenu>
     </h:form>
-    </body> 
+    </h:body> 
      
 </html>
