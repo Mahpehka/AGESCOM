@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -30,14 +31,15 @@ public class Materiel implements Serializable{
     private String N_serie;
     @Column( nullable = false)
     private  String type;
-    @OneToMany
-    private List<Demande> demandes;
-    @OneToMany
-    private List<Reforme> reformes;
-    @OneToMany
-    private List<Cession> cessions;
-    @OneToMany
-    private List<Fiche_detenteur> fiche_detenteurs;
+  
+    @ManyToOne
+    private Sortie sortie;
+   
+    @ManyToOne
+    private Demande demande;
+    
+    @ManyToOne
+    private Fiche_detenteur fiche_detenteur;
 
     public Long getId() {
         return id;
@@ -72,39 +74,33 @@ public class Materiel implements Serializable{
         this.type = type;
     }
 
-    public List<Demande> getDemandes() {
-        return demandes;
+    public Demande getDemande() {
+        return demande;
     }
 
-    public void setDemandes(List<Demande> demandes) {
-        this.demandes = demandes;
+    public void setDemande(Demande demande) {
+        this.demande = demande;
+    }
+
+    public Sortie getSortie() {
+        return sortie;
+    }
+
+    public void setSortie(Sortie sortie) {
+        this.sortie = sortie;
     }
 
   
-    public List<Reforme> getReformes() {
-        return reformes;
+    public Fiche_detenteur getFiche_detenteur() {
+        return fiche_detenteur;
     }
 
-    public void setReformes(List<Reforme> reformes) {
-        this.reformes = reformes;
-    }
-
-    public List<Cession> getCessions() {
-        return cessions;
-    }
-
-    public void setCessions(List<Cession> cessions) {
-        this.cessions = cessions;
+    public void setFiche_detenteur(Fiche_detenteur fiche_detenteur) {
+        this.fiche_detenteur = fiche_detenteur;
     }
 
    
-    public List<Fiche_detenteur> getFiche_detenteurs() {
-        return fiche_detenteurs;
-    }
-
-    public void setFiche_detenteurs(List<Fiche_detenteur> fiche_detenteurs) {
-        this.fiche_detenteurs = fiche_detenteurs;
-    }
+   
     
     
     

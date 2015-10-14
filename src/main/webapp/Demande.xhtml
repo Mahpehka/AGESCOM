@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>AGESCOM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 10px;  "> </div>
+        <f:view>
+
+
+        <p:dialog widgetVar="dlg" header=" Enregistrer un nouvelle  commande" hideEffect="explode" showEffect="explode" modal="true">
+
+                <h:form>
+                    <h1><h:outputText value="Enregistrer une demande"/></h1>
+                        <p:panelGrid columns="2">
+                        
+                        <p:outputLabel value="Personne:"/>
+                        <p:selectOneMenu  value="#{demandeBean.idpersonne}" label="personne"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                            <f:selectItems var="custe" value="#{demandeBean.listePersonnes}"   itemLabel="#{custe.nom}" itemValue="#{custe.id}" itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                        
+                        </p:panelGrid>
+                        <p:commandButton value="Enregistrer" action="#{demandeBean.createDemande()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>                                                                
+            </h:form>
+        </p:dialog>
+
+            <p:dialog widgetVar="dl" header=" Modifier une demande" hideEffect="fold" showEffect="explode" resizable="true">
+
+                <h:form id="formModifier">
+                    <p:panelGrid columns="2" id="panelGModifier">
+                        <p:outputLabel value="Quantite:" for="quantite" />
+                        <p:inputText id="quantite" value="#{demandeBean.demande.quantite}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                        <p:outputLabel value="Personne:" for="personne" />
+                        <p:selectOneMenu id="personne" value="#{demandeBean.demande.personne}" >
+                            
+                            <f:selectItems value="#{fixme}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Date"/>
+                        <p:calendar value="#{demandeBean.date}" mode="popup"
+                                    showOn="button" />
+
+                        <p:outputLabel value="Materiel:"/> 
+                        <p:selectCheckboxMenu value="#{demandeBean.tab}" label="Listes des materiels"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                            <f:selectItems var ="fin" value="#{demandeBean.listeMateriels}" itemLabel="#{fin.designation}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                        </p:selectCheckboxMenu>
+                        
+                        <p:commandButton value="Modifier" action="#{demandeBean.updateDemande()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+            <p:dialog widgetVar="dle" header=" une nouvelle  commande" hideEffect="explode" showEffect="explode" modal="true">
+                <h:form id="formModifieree">
+                    <p:panelGrid columns="2" id="panelGModifiere">
+                        <p:outputLabel value="Quantite:" for="quantite" />
+                        <p:inputText id="quantite" value="#{demandeBean.qte}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                        
+                        <p:outputLabel value="Materiels:"/>
+                        <p:selectOneMenu  value="#{demandeBean.idmotos}" label="personne"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                            <f:selectItems var="custe" value="#{demandeBean.listeMateriels}"   itemLabel="#{custe.designation}" itemValue="#{custe.id}" itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="Ajouter" action="#{demandeBean.listeur()}"  oncomplete="PF('dle').hide()" update=":tableForm:table" />
+                </h:form>
+            </p:dialog>
+
+
+        </f:view>
+        <f:view>
+
+            <h:form id='tableForm'>
+                <p:dataTable value="#{demandeBean.maliste()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{demandeBean.demande}" rowKey="#{item.id}">
+
+                    <p:column filterBy="#{item.designation}" sortBy="{item.designation}">
+                        <f:facet name="header">
+                            <h:outputText value="Designation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.designation}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.n_serie}" sortBy="#{item.n_serie}">
+                        <f:facet name="header">
+                            <h:outputText value="N_serie"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_serie}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.type}" sortBy="#{item.type}">
+                        <f:facet name="header">
+                            <h:outputText value="type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton  onclick="PF('dle').show()" value="creation de la liste"/>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="fin de la Demande" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Demande"/>        
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>

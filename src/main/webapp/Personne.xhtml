@@ -5,18 +5,136 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div id="top"></div>
-        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TAGESCOM</title>
+
+    </h:head>
+    <h:body>
+        <div id="top"> </div>
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
 
-        <div style="height: 100px;"> </div>
-    </body>
+        <div style="height: 10px; "> </div>
+
+        <f:view>
+
+
+            <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle personne" hideEffect="explode" showEffect="explode" modal="true">
+
+                <h:form>
+                    <h1><h:outputText value="Enregistrer une personne "/></h1>
+                    <p:panelGrid columns="4">
+                        <p:outputLabel value="Matricule:" for="matricule" />
+                        <p:inputText id="matricule" value="#{personneBean.personne.matricule}" title="Matricule" required="true" requiredMessage="The Matricule field is required."/>
+                        <p:outputLabel value="Nom:" for="nom" />
+                        <p:inputText id="nom" value="#{personneBean.personne.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                        <p:outputLabel value="Prenom:" for="prenom" />
+                        <p:inputText id="prenom" value="#{personneBean.personne.prenom}" title="Prenom" />
+                        <p:outputLabel value="Division:"/>
+                        <p:selectOneMenu value="#{personneBean.personne.division}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                            <f:selectItems var="cust" value="#{personneBean.division}"    itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Fonction:"/>
+                        <p:selectOneMenu value="#{personneBean.personne.fonction}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                            <f:selectItems var="cust" value="#{personneBean.fonction}"    itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Login:" for="login" />
+                        <p:inputText id="login" value="#{personneBean.personne.login}" title="Login" required="true" requiredMessage="The Login field is required."/>
+                        <p:outputLabel value="Password:" for="password" />
+                        <p:inputText id="password" value="#{personneBean.personne.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                       
+                    </p:panelGrid>
+                    <p:commandButton value="Enregistrer" action="#{personneBean.createPersonne()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog widgetVar="dl" header=" Modifier une personne" hideEffect="fold" showEffect="explode" resizable="true">
+
+                <h:form id="formModifier">
+                    <p:panelGrid columns="4" id="panelGModifier">
+                        <p:outputLabel value="Matricule:" for="matricule" />
+                        <p:inputText id="matricule" value="#{personneBean.personne.matricule}" title="Matricule" required="true" requiredMessage="The Matricule field is required."/>
+                        <p:outputLabel value="Nom:" for="nom" />
+                        <p:inputText id="nom" value="#{personneBean.personne.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                        <p:outputLabel value="Prenom:" for="prenom" />
+                        <p:inputText id="prenom" value="#{personneBean.personne.prenom}" title="Prenom" />
+                        <p:outputLabel value="Fonction:" for="fonction" />
+                        <p:inputText id="fonction" value="#{personneBean.personne.fonction}" title="Fonction" required="true" requiredMessage="The Fonction field is required."/>
+                        <p:outputLabel value="Division:" for="division" />
+                        <p:inputText id="division" value="#{personneBean.personne.division}" title="Division" required="true" requiredMessage="The Division field is required."/>
+                        <p:outputLabel value="Login:" for="login" />
+                        <p:inputText id="login" value="#{personneBean.personne.login}" title="Login" required="true" requiredMessage="The Login field is required."/>
+                        <p:outputLabel value="Password:" for="password" />
+                        <p:inputText id="password" value="#{personneBean.personne.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                        <h:inputHidden id="number" value="#{personneBean.personne.id}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="Modifier" action="#{personneBean.updatePersonne()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                </h:form>
+            </p:dialog>
+
+
+        </f:view>
+        <f:view>
+
+            <h:form id='tableForm'>
+                <p:dataTable value="#{personneBean.findAllPersonne()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{personneBean.personne}" rowKey="#{item.id}">
+             
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matricule"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matricule}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prenom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fonction"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fonction}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Division"/>
+                        </f:facet>
+                        <h:outputText value="#{item.division}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Login"/>
+                        </f:facet>
+                        <h:outputText value="#{item.login}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Password"/>
+                        </f:facet>
+                        <h:outputText value="#{item.password}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Personne" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Personne" update=":formModifier:panelGModifier"/>
+
+            </h:form>
+        </f:view>
+
+    </h:body>
 </html>

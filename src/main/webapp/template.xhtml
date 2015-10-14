@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style1.css"/>
+        <h:outputStylesheet library="css" name="style2.css"/>
+        <link rel="shortcut icon" type="image/png" href="/resources/images/sigle1.PNG" />
+        <title><ui:insert name="title">Bienvenue</ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <p:growl id="growl" life="40000"/>
+        
+        <div id="top">
+            <ui:insert name="top"><ui:include src="menu.xhtml" /></ui:insert>
+        </div>
+        <div>
+            <div id="content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom"><ui:include src="footer.xhtml" /></ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

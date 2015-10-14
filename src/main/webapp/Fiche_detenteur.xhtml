@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>AGESCOM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+         <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 10px; "> </div>
+
+        <f:view>
+
+         
+           <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle fiche_detenteur" hideEffect="explode" showEffect="explode" modal="true">
+
+            <h:form>
+                <h1><h:outputText value="Enregistrer une fiche_detenteur "/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Personne:"/>
+                    <p:selectOneMenu  value="#{fiche_detenteurBean.idpersonne}" label="personne"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                        <f:selectItems var="custe" value="#{fiche_detenteurBean.listePersonnes}"   itemLabel="#{custe.nom}" itemValue="#{custe.id}" itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                    <p:outputLabel value="Fiche_detenteur:"/> 
+                    <p:selectCheckboxMenu value="#{fiche_detenteurBean.tab}" label="Listes des materiels"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                        <f:selectItems var ="fin" value="#{fiche_detenteurBean.listeMateriels}" itemLabel="#{fin.n_serie}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                    </p:selectCheckboxMenu>
+                </p:panelGrid>
+                <p:commandButton value="Enregistrer" action="#{fiche_detenteurBean.createFiche_detenteur()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+            </h:form>
+        </p:dialog>
+
+         <p:dialog widgetVar="dl" header=" Modifier une commande" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifier">
+                <p:panelGrid columns="2" id="panelGModifier">
+                    <p:outputLabel value="Personne:"/>
+                    <p:selectOneMenu  value="#{fiche_detenteurBean.idpersonne}" label="personne"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                        <f:selectItems var="custe" value="#{fiche_detenteurBean.listePersonnes}"   itemLabel="#{custe.nom}" itemValue="#{custe.id}" itemLabelEscaped="true" />
+                        </p:selectOneMenu>
+                    <p:outputLabel value="Fiche_detenteur:"/> 
+                    <p:selectCheckboxMenu value="#{fiche_detenteurBean.tab}" label="Listes des materiels"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                        <f:selectItems var ="fin" value="#{fiche_detenteurBean.listeMateriels}" itemLabel="#{fin.n_serie}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                    </p:selectCheckboxMenu>
+                    
+                    <h:inputHidden id="number" value="#{fiche_detenteurBean.fiche_detenteur.id}" />
+                    
+                </p:panelGrid>
+                <p:commandButton value="Modifier" action="#{fiche_detenteurBean.updateFiche_detenteur()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+            </h:form>
+        </p:dialog>
+        <p:dialog widgetVar="dle" header=" liste materiels par nom" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifiere">
+                <p:panelGrid columns="2" id="panelGModifiere">
+                    <p:outputLabel value="Personne:"/>
+                    <p:selectOneMenu  value="#{fiche_detenteurBean.idpersonnes}" label="personne"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
+                        <f:selectItems var="custe" value="#{fiche_detenteurBean.listePersonnes}"   itemLabel="#{custe.nom}" itemValue="#{custe.id}" itemLabelEscaped="true" />
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                <p:commandButton value="afficher" action="#{fiche_detenteurBean.fonctions()}"  oncomplete="PF('dle').hide()" update=":tableForm:table" />
+            </h:form>
+        </p:dialog>
+        
+        </f:view>
+        <f:view>
+              <h:form id='tableForm'>
+                  <p:dataTable value="#{fiche_detenteurBean.findAllFiche_detenteurs()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fiche_detenteurBean.fiche_detenteur}" rowKey="#{item.id}">
+
+                      <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Personne"/>
+                        </f:facet>
+                        <h:outputText value="#{item.personne.nom}"/>
+                    </p:column>
+                  </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle fiche_detenteur" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier fiche_detenteur" />
+                <p:commandButton  onclick="PF('dle').show()" value="liste materiels par nom"/>
+                
+
+            </h:form>
+        </f:view>
+
+        
+    </h:body>
+</html>

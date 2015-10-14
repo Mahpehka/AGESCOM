@@ -16,6 +16,13 @@
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
+
+
+        <div style="height: 10px;"> </div>
+        
+        
+   
+
             <h:form id='tableForm'>
                 <p:dataTable value="#{fournisseurBean.fournisseurs}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{item.id}">
                     <f:facet name="header">
@@ -101,4 +108,5 @@
 
             </p:dialog>   
     </h:body>
+
 </html>

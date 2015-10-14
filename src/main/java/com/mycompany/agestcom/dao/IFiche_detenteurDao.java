@@ -5,6 +5,7 @@
  */
 package com.mycompany.agestcom.dao;
 
+import com.douwe.generic.dao.DataAccessException;
 import com.douwe.generic.dao.IDao;
 import com.mycompany.agestcom.data.Fiche_detenteur;
 import java.io.Serializable;

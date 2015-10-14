@@ -17,8 +17,10 @@
         <div id="menu">
             <ui:include src="menu.xhtml"/>
         </div>
+        
+       
 
-        <div style="height: 100px;"> </div>
+        <div style="height: 10px;"> </div>
 
         
         <p:dialog widgetVar="dlg" header=" Enregistrer un nouveau Materiel" hideEffect="explode" showEffect="explode" modal="true">
@@ -32,8 +34,9 @@
                     <p:selectOneMenu value="#{materielBean.materiel.type}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
                         <f:selectItems var="cust" value="#{materielBean.types}"    itemLabelEscaped="true" />
                     </p:selectOneMenu>
-                </p:panelGrid>
+                </p:panelGrid> 
                 <p:commandButton value="Enregistrer" action="#{materielBean.createMateriel()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+                                                                                
             </h:form>
         </p:dialog>
 
@@ -90,6 +93,10 @@
 
 
         </f:view>
+        
+         <div id="footer">
+            <ui:include src="footer.xhtml"/>
+        </div>
 
     </h:body>
 </html>

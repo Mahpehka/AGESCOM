@@ -61,4 +61,7 @@ public class OrientationBean {
     public  String Cession(){
         return "Cession";
     }
+    public  String listesMako(){
+        return "listes";
+    }
 }

@@ -10,8 +10,7 @@
 
     <!-- la couche dao  -->
     <bean id="IPersonneDao" class="com.mycompany.agestcom.dao.impl.PersonneDaoImpl"/>
-    <bean id="IReformeDao" class="com.mycompany.agestcom.dao.impl.ReformeDaoImpl"/>
-    <bean id="ICessionDao" class="com.mycompany.agestcom.dao.impl.CessionDaoImpl"/>
+    <bean id="ISortieDao" class="com.mycompany.agestcom.dao.impl.SortieDaoImpl"/>
     <bean id="IFiche_detenteurDao" class="com.mycompany.agestcom.dao.impl.Fiche_detenteurDaoImpl"/>
     <bean id="IFournisseurDao" class="com.mycompany.agestcom.dao.impl.FournisseurDaoImpl"/>
     <bean id="ICommandeDao" class="com.mycompany.agestcom.dao.impl.CommandeDaoImpl"/>
@@ -21,11 +20,8 @@
 
     <!-- la couche servcie-->
     
-    <bean id="IPersonneSevice" class="com.mycompany.agestcom.service.impl.PersonneServiceImpl">
+    <bean id="IPersonneService" class="com.mycompany.agestcom.service.impl.PersonneServiceImpl">
         <property name="iPerseonneDao" ref="IPersonneDao"/>
-    </bean>
-     <bean id="ICessionService" class="com.mycompany.agestcom.service.impl.CessionServiceImpl">
-        <property name="iCessionDao" ref="ICessionDao"/>
     </bean>
     <bean id="ICommandeService" class="com.mycompany.agestcom.service.impl.CommandeServiceImpl">
         <property name="iCommandeDao" ref="ICommandeDao"/>
@@ -42,9 +38,9 @@
     <bean id="IMaterielService" class="com.mycompany.agestcom.service.impl.MaterielServiceImpl">
         <property name="iMaterielDao" ref="IMaterielDao"/>
     </bean>
-    <bean id="IReformeService" class="com.mycompany.agestcom.service.impl.ReformeServiceIpml">
+    <bean id="ISortieService" class="com.mycompany.agestcom.service.impl.SortieServiceImpl">
        
-        <property name="iReformeDao" ref="IReformeDao"/>
+        <property name="iSortieDao" ref="ISortieDao"/>
     </bean>
      <bean id="ILivraisonService" class="com.mycompany.agestcom.service.impl.LivraisonServiceImpl">
         <property name="iLivraisonDao" ref="ILivraisonDao"/>

@@ -1,0 +1,14 @@
+body{
+    background:skyblue;
+    
+}
+
+#main{
+    background: skyblue;
+    width: 1000px;
+    margin: auto;
+    border: solid black;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 50px;
+}

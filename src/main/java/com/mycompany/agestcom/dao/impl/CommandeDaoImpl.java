@@ -8,7 +8,6 @@ package com.mycompany.agestcom.dao.impl;
 import com.douwe.generic.dao.impl.GenericDao;
 import com.mycompany.agestcom.dao.ICommandeDao;
 import com.mycompany.agestcom.data.Commande;
-import java.io.Serializable;
 
 /**
  *

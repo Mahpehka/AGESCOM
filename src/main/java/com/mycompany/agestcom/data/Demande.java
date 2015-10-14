@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -26,16 +27,14 @@ public class Demande implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column( nullable = false)
-    private String relation;
-    @Column( nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
     @Column( nullable = false)
     private int quantite;
     @ManyToOne
     private Personne personne;
-    @ManyToOne
-    private Materiel materiel; 
+    @OneToMany
+    private List<Materiel> materiels;
 
     public Long getId() {
         return id;
@@ -45,14 +44,7 @@ public class Demande implements Serializable{
         this.id = id;
     }
 
-    public String getRelation() {
-        return relation;
-    }
-
-    public void setRelation(String relation) {
-        this.relation = relation;
-    }
-
+   
     public Date getDate() {
         return date;
     }
@@ -77,14 +69,17 @@ public class Demande implements Serializable{
         this.personne = personne;
     }
 
-    public Materiel getMateriel() {
-        return materiel;
+    
+
+    public List<Materiel> getMateriels() {
+        return materiels;
     }
 
-    public void setMateriel(Materiel materiel) {
-        this.materiel = materiel;
+    public void setMateriels(List<Materiel> materiels) {
+        this.materiels = materiels;
     }
 
+ 
  
     
     

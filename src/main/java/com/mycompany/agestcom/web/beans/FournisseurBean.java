@@ -8,6 +8,7 @@ package com.mycompany.agestcom.web.beans;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.service.IFournisseurService;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -90,6 +91,7 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         }
     }
     
+<<<<<<< HEAD
     public void update(){
         try {
             iFournisseurService.updateFournisseur(fournisseur);
@@ -98,6 +100,18 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         }
     }
     
+=======
+
+    public List<Fournisseur> findAllFournisseur(){
+        try {
+            return iFournisseurService.findAllFournisseurs();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+>>>>>>> b34347c3983ca268bee4f4323fb93b7312ea5dee
     
     @Override
     public Object getRowKey(Fournisseur t) {

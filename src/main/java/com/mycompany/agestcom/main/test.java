@@ -3,7 +3,9 @@ package com.mycompany.agestcom.main;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.data.Livraison;
+import com.mycompany.agestcom.data.Personne;
 import com.mycompany.agestcom.service.IFournisseurService;
+import com.mycompany.agestcom.service.IPersonneService;
 import com.mycompany.agestcom.service.ILivraisonService;
 import java.util.Properties;
 import javax.mail.Address;
@@ -81,11 +83,35 @@ public class test {
         
         Properties properties = new Properties();
 
+<<<<<<< HEAD
         properties.put("mail.smtp.host", "smtp.gmail.com");
         
         properties.put("mail.smtp.starttls.enable", "true");
         
         properties.put("mail.smtp.port", "587");
+=======
+//        
+//        tx.commit();
+//        
+    
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        ILivraisonService service = ctx.getBean("ILivraisonService", ILivraisonService.class);
+        IFournisseurService servic = ctx.getBean("IFournisseurService", IFournisseurService.class);
+        IPersonneService ser = ctx.getBean("IPersonneService", IPersonneService.class);
+
+        
+        Personne per=new Personne();
+        per.setLogin("mpk");
+        per.setMatricule("12XO3");
+        per.setNom("kodjoe");
+        per.setPassword("rien");
+        ser.createPersonne(per);
+//        Fournisseur four =  new Fournisseur();
+//        Livraison liv = service.findLivraisonById(1L);
+//        four.setEmail("mpk@yahoo.fr");
+//        four.setNom("mimi");
+//        four.setTel("670041407");
+>>>>>>> b34347c3983ca268bee4f4323fb93b7312ea5dee
         
         //properties.put("mail.smtp.starttls.enable", "true");
 
@@ -111,8 +137,14 @@ public class test {
           //System.out.println("ajout des destinataire du message");
         } catch (MessagingException e) {
 
+<<<<<<< HEAD
             e.printStackTrace();
         }
+=======
+         //servic.createFournisseur(four);
+         System.out.println("" + ser.findAllPersonne().size());
+       
+>>>>>>> b34347c3983ca268bee4f4323fb93b7312ea5dee
         
         //System.out.println("on essaye d'envoyer le message");
         try {

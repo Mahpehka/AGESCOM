@@ -82,6 +82,26 @@ public class PersonneServiceImpl implements IPersonneService{
             Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    
+    public Personne findByLogin(String s) throws ServiceException {
+        try {
+            return iPerseonneDao.findByLogin(s);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        throw new  ServiceException("login incorrect");
+    }
+
+    public Personne findByPassword(String s) throws ServiceException {
+
+        try {
+            return iPerseonneDao.findByPassword(s);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(PersonneServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        throw  new  ServiceException("password incorrect");
+    }
     
 
    

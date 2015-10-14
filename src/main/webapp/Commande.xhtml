@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+       
+       <div id="top"> </div>
+        <div id="menu">
+            <ui:include src="menu.xhtml"/>
+        </div>
+
+        <div style="height: 10px; "> </div>
+
+      
+            <h:form id='tableForm'>
+                <p:dataTable value="#{commandeBean.findAllCommande()}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{commandeBean.commande}" rowKey="#{item.id}">
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="N_commande"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_commande}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date_commande"/>
+                        </f:facet>
+                        <h:outputText value="#{item.date_commande}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="N_ordre_entree"/>
+                        </f:facet>
+                        <h:outputText value="#{item.n_ordre_entree}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantite"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantite}"/>
+                    </p:column>
+                 </p:dataTable>
+                <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouvelle Commande" />
+                <p:commandButton  onclick="PF('dl').show()" value="Modifier Commande" update=":formModifier:panelGModifier"/>
+
+            </h:form>
+        
+        
+           <p:dialog widgetVar="dlg" header=" Enregistrer une nouvelle commande" hideEffect="explode" showEffect="explode" modal="true">
+
+            <h:form>
+                <h1><h:outputText value="Enregistrer une commande "/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="N_commande:" for="n_commande" />
+                    <p:inputText id="n_commande" value="#{commandeBean.commande.n_commande}" title="N_commande" />
+                    <p:outputLabel value="N_ordre_entree:" for="n_ordre_entree" />
+                    <p:inputText id="n_ordre_entree" value="#{commandeBean.commande.n_ordre_entree}" title="N_ordre_entree" />
+                    <p:outputLabel value="Quantite:" for="quantite" />
+                    <p:inputText id="quantite" value="#{commandeBean.commande.quantite}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                    <p:outputLabel value="Livraison:"/> 
+                    <p:selectCheckboxMenu value="#{commandeBean.tab}" label="Listes des livraisons"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                        <f:selectItems var ="fin" value="#{commandeBean.listeLivraisons}" itemLabel="#{fin.n_bon_livraison}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                    </p:selectCheckboxMenu>
+                
+                <p:commandButton value="Enregistrer" action="#{commandeBean.createCommande()}"  oncomplete="PF('dlg').hide()" update=":tableForm:table"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+         <p:dialog widgetVar="dl" header=" Modifier une commande" hideEffect="fold" showEffect="explode" resizable="true">
+
+            <h:form id="formModifier">
+                <p:panelGrid columns="2" id="panelGModifier">
+                    <p:outputLabel value="N_commande:" for="n_commande" />
+                    <p:inputText id="n_commande" value="#{commandeBean.commande.n_commande}" title="N_commande" />
+                    
+                    <p:outputLabel value="N_ordre_entree:" for="n_ordre_entree" />
+                    <p:inputText id="n_ordre_entree" value="#{commandeBean.commande.n_ordre_entree}" title="N_ordre_entree" />
+                    <p:outputLabel value="Quantite:" for="quantite" />
+                    <p:inputText id="quantite" value="#{commandeBean.commande.quantite}" title="Quantite" required="true" requiredMessage="The Quantite field is required."/>
+                    <p:outputLabel value="Livraison:" />
+                    <p:selectCheckboxMenu value="#{commandeBean.tab}" label="Listes des livraisons"
+                                              filterMatchMode="custom" converter="javax.faces.Long" filterFunction="customFilter">
+                        <f:selectItems var ="fin" value="#{commandeBean.listeLivraisons}" itemLabel="#{fin.n_bon_livraison}" itemValue="#{fin.id}" itemLabelEscaped="true"/>
+                    </p:selectCheckboxMenu>
+                    <h:inputHidden id="number" value="#{commandeBean.commande.id}" />
+                    <p:commandButton value="Modifier" action="#{commandeBean.updateCommande()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        
+        
+    </h:body>
+</html>
