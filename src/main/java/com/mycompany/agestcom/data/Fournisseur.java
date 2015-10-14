@@ -77,8 +77,10 @@ public class Fournisseur implements Serializable{
         this.livraison = livraison;
     }
 
-   
-    
+    @Override
+    public String toString() {
+        return nom;
+    } 
     
             
            
