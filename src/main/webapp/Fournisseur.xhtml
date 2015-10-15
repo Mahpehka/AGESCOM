@@ -24,29 +24,29 @@
    
 
             <h:form id='tableForm'>
-                <p:dataTable value="#{fournisseurBean.fournisseurs}" var="fournisseur" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{fournisseur.id}">
+                <p:dataTable value="#{fournisseurBean.fournisseurs}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{item.id}">
                     <f:facet name="header">
                         La liste des fournisseurs
                     </f:facet>
                     
-                    <p:column headerText="nom" filterBy="#{fournisseur.nom}" sortBy="#{fournisseur.nom}">
-                        <h:outputText value="#{fournisseur.nom}" />  
+                    <p:column headerText="nom" filterBy="#{item.nom}" sortBy="#{item.nom}">
+                        <h:outputText value="#{item.nom}" />  
                     </p:column> 
 
-                    <p:column headerText="email" filterBy="#{fournisseur.email}">  
-                        <h:outputText value="#{fournisseur.email}"/> 
+                    <p:column headerText="email" filterBy="#{item.email}">  
+                        <h:outputText value="#{item.email}"/> 
                     </p:column>
                     
-                    <p:column headerText="numero téléphone" filterBy="#{fournisseur.tel}">  
-                        <h:outputText value="#{fournisseur.tel}"/> 
+                    <p:column headerText="numero téléphone" filterBy="#{item.tel}">  
+                        <h:outputText value="#{item.tel}"/> 
                     </p:column>
                     
                 </p:dataTable>
                 <div>
                 <p:commandButton type="button" onclick="PF('dlg').show()" value="Nouveau fournisseur" />
-                <p:commandButton type="button" onclick="PF('mf').show()" value="Modifier fournisseur" />
-                <p:commandButton type="button" onclick="PF('dl').show()" value="Supprimer fournisseur" />
-                <p:commandButton type="button" onclick="PF('dl').show()" value="Envoyer un email" />
+                <p:commandButton type="button" onclick="PF('mf').show()" value="Modifier fournisseur" update=":dialog_udp.updateform"/>
+                <p:commandButton type="button" onclick="PF('sf').show()" value="Supprimer fournisseur" update="@all"/>
+                <p:commandButton type="button" onclick="PF('ee').show()" value="Envoyer un email" />
                 </div>
             </h:form>
             <p:dialog id="dialog" header="Nouveau fournisseur" widgetVar="dlg" resizable="false" showEffect="explode" hideEffect="explode" >  
@@ -60,30 +60,53 @@
                         <p:outputLabel value="Tel:" for="tel" />
                         <p:inputText id="tel" value="#{fournisseurBean.fournisseur.tel}" title="Telephone" required="true" requiredMessage="Le champ telephone est obligatoire."/>
                     </p:panelGrid>
-                    <p:commandButton type="button" oncomplete ="PF('dlg').hide()" value="Enregistrer" update=":tableForm:table" action="#{fournisseurBean.save()}"/>
+                    <p:commandButton oncomplete="PF('dlg').hide()" value="Enregistrer" update=":tableForm:table" actionListener="#{fournisseurBean.save()}"/>
                     <p:commandButton type="reset" value="Effacer" />
                 </h:form>
 
             </p:dialog>       
-            <p:dialog  header="Modifier fournisseur" widgetVar="mf" resizable="false" showEffect="explode" hideEffect="explode" >  
-                <f:view>
-                    <h:form>
-                        <p:panelGrid columns="2">
+            <p:dialog header="Modifier fournisseur" widgetVar="mf" resizable="false" showEffect="shake" hideEffect="explode" >  
+                
+                    <h:form id="dialog_udp">
+                        <p:panelGrid columns="2" id="updateform">
                             <p:outputLabel value="Nom:"/>
-                            <p:inputText value="#{fournisseurBean.fournisseur.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.nom}" required="true" requiredMessage="The Nom field is required."/>
                             
                             <p:outputLabel value="Email:"/>
-                            <p:inputText value="#{fournisseurBean.fournisseur.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.email}" required="true" requiredMessage="The Email field is required."/>
                             
                             <p:outputLabel value="Telephone:"/>
-                            <p:inputText value="#{fournisseurBean.fournisseur.tel}" title="Tel" required="true" requiredMessage="The Tel field is required."/>
+                            <p:inputText value="#{fournisseurBean.fournisseur.tel}" required="true" requiredMessage="The Tel field is required."/>
                             
                             <h:inputHidden value="#{fournisseurBean.fournisseur.id}"/>
+                            
+                            <f:facet name="footer">
+                            <p:commandButton oncomplete="PF('mf').hide()" value="Enregistrer" update=":tableForm:table" actionListener="#{fournisseurBean.update()}"/>
+                            </f:facet>
+                            <f:facet name="footer">
+                            <p:commandButton type="reset" value="Effacer" />
+                            </f:facet>
                         </p:panelGrid>
                     </h:form>
-                </f:view>
+                
             </p:dialog>        
             
+            <p:dialog id="dialog_email" header="Envoyer un email" widgetVar="ee" resizable="false" showEffect="explode" hideEffect="explode" >  
+
+                <h:form>
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="Fournisseur:"/>
+                        <p:selectOneMenu value="#{fournisseurBean.fournisseur}" >
+                            <f:selectItems value="#{fournisseurBean.fournisseurs}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Message"/>
+                        <p:inputTextarea rows="6" cols="33" value="#{fournisseurBean.msg}" />
+                    </p:panelGrid>
+                    <p:commandButton oncomplete="PF('ee').hide()" value="Envoyé" actionListener="#{fournisseurBean.email()}"/>
+                    <p:commandButton type="reset" value="Effacer" />
+                </h:form>
+
+            </p:dialog>   
     </h:body>
 
 </html>
