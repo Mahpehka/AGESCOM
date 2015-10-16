@@ -19,18 +19,29 @@
 
                 <h1><span>AGESTCOM</span></h1>
 
-                    <h:form >
-                               
-                        <p:panelGrid columns="2" style="text-align: center;">
+                    <f:view>
+                    <p:panel header="Connexion" style="width: 500px;" id="tabClass">
+                        
+                           <h:form >            
+                                <p:growl id="growl"  showDetail="true"  />
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputLabel for="username" value="Nom utilisateur:" />
+                                    <p:inputText id="username" value="#{connexionBean.login}" required="true" label="username" requiredMessage="Le nom d'utilisateur est obligatoire"/>
 
-                            <p:outputLabel value="Login" />
-                            <p:inputText id="login" value="#{connexionBean.login}" required="true" requiredMessage="The Login field is required."/>
-                            <p:outputLabel value="Password" />
-                            <p:password id="password" value="#{connexionBean.password}" required="true" requiredMessage="The Password field is required."/>
+                                    <h:outputLabel for="password" value="Mot de passe:" />
+                                    <p:password id="password" value="#{connexionBean.password}" required="true" label="password" feedback="false" requiredMessage="Le mot de passe est obligatoire"/>
 
-                        </p:panelGrid>
-                        <p:commandButton  value="Se connecter" action="#{connexionBean.seconnecter()}" />
-                    </h:form>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Connexion" update="growl" action="#{connexionBean.seconnecter()}"/>
+                                    </f:facet>  
+                                </h:panelGrid>
+
+                            </h:form>
+                    </p:panel>
+
+
+
+                </f:view>
             </div>
         </h:body>
 </html>
