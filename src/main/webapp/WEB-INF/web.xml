@@ -19,11 +19,7 @@
     </session-config>
     <welcome-file-list>        
         <welcome-file>
-<<<<<<< HEAD
-            faces/Fournisseur.xhtml
-=======
             faces/Connexion.xhtml
->>>>>>> b34347c3983ca268bee4f4323fb93b7312ea5dee
         </welcome-file>
     </welcome-file-list>
     <listener>        

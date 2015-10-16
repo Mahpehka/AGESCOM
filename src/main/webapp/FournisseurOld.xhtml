@@ -24,9 +24,7 @@
 
 
         <h:form id='tableForm'>
-            
-            <p:dataTable  var="item" id="table" value="#{fournisseurBean.fournisseurs}" selection="#{fournisseurBean.fournisseur}" selectionMode="single" rowKey="#{item.id}" paginator="true" rows="10" paginatorPosition="bottom">  
-
+            <p:dataTable value="#{fournisseurBean.fournisseurs}" var="item" paginator="true" rows="5" paginatorPosition="bottom" id="table" selectionMode="single" selection="#{fournisseurBean.fournisseur}" rowKey="#{item.id}">
                 <f:facet name="header">
                     La liste des fournisseurs
                 </f:facet>
@@ -42,11 +40,10 @@
                 <p:column headerText="numero téléphone" filterBy="#{item.tel}">  
                     <h:outputText value="#{item.tel}"/> 
                 </p:column>
-
                 <f:facet name="footer"> 
                     <p:commandButton  onclick="PF('dlg').show()" value="Nouveau fournisseur" />
-                    <p:commandButton  onclick="PF('mf').show()" value="Modifier fournisseur" update=":dialog_udp:updateform" />
-                    <p:commandButton  onclick="PF('cd').show()" value="Supprimer fournisseur" update=":supform"/>
+                    <p:commandButton  onclick="PF('mf').show()" value="Modifier fournisseur" />
+                    <p:commandButton  onclick="PF('sf').show()" value="Supprimer fournisseur"/>
                     <p:commandButton  onclick="PF('ee').show()" value="Envoyer un email" />
                 </f:facet> 
             </p:dataTable>
@@ -95,15 +92,6 @@
             </h:form>
 
         </p:dialog>        
-
-
-        <p:confirmDialog  id="confirm" message="voulez vous vraiment supprimer?" showEffect="fade" widgetVar="cd" severity="alert" hideEffect="explode" >
-            <h:form id="supform">
-                <h:inputHidden  id="entree11" value="#{fournisseurBean.fournisseur.id}"/>
-                <p:commandButton value="Oui" action="#{fournisseurBean.deleteFournisseur()}"  oncomplete="PF('cd').hide()" icon="ui-icon-check" update=":tableForm:table"/>
-                <p:commandButton value="Non" onclick="PF('cd').hide()" icon="ui-icon-close" />
-            </h:form>
-        </p:confirmDialog>
 
         <p:dialog id="dialog_email" header="Envoyer un email" widgetVar="ee" resizable="false" showEffect="explode" hideEffect="explode" >  
 

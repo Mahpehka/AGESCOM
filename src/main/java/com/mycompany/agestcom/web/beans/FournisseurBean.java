@@ -8,6 +8,8 @@ package com.mycompany.agestcom.web.beans;
 import com.douwe.generic.dao.DataAccessException;
 import com.mycompany.agestcom.data.Fournisseur;
 import com.mycompany.agestcom.service.IFournisseurService;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -32,15 +35,15 @@ import org.primefaces.model.SelectableDataModel;
  * @author root
  */
 @ManagedBean
-@RequestScoped 
-public class FournisseurBean implements SelectableDataModel<Fournisseur>{
+@SessionScoped
+public class FournisseurBean implements Serializable{
 
     @ManagedProperty(value = "#{IFournisseurService}")
     IFournisseurService iFournisseurService;
     
     private Fournisseur fournisseur = new Fournisseur();
     
-    private List<Fournisseur> fournisseurs = new LinkedList<Fournisseur>();
+    private List<Fournisseur> fournisseurs = new ArrayList<Fournisseur>();
     
     private String msg = new String();
 
@@ -51,6 +54,11 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public FournisseurBean() {
+    }
+    
+    
    
     public List<Fournisseur> getFournisseurs() {
         try {
@@ -74,6 +82,9 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
     }
 
     public Fournisseur getFournisseur() {
+        if(fournisseur == null){
+            fournisseur = new Fournisseur();
+        }
         return fournisseur;
     }
 
@@ -85,7 +96,19 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
     public void save(){
         
         try {
+            System.out.println("==============================Je viens faire l'enregistrement");
+            System.out.println(fournisseur);
             iFournisseurService.createFournisseur(fournisseur);
+            fournisseur = new Fournisseur();
+        } catch (DataAccessException ex) {
+            Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteFournisseur(){
+        try {
+            System.out.println("L'id = "+fournisseur.getId());
+            iFournisseurService.deleteFournisseur(fournisseur.getId());
         } catch (DataAccessException ex) {
             Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,7 +116,11 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
     
     public void update(){
         try {
+            System.out.println("==============================Je viens faire la mise à jour");
+            System.out.println(fournisseur);
+            System.out.println("L'id = "+fournisseur.getId());
             iFournisseurService.updateFournisseur(fournisseur);
+            fournisseur = new Fournisseur();
         } catch (DataAccessException ex) {
             Logger.getLogger(FournisseurBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,22 +136,6 @@ public class FournisseurBean implements SelectableDataModel<Fournisseur>{
         return Collections.EMPTY_LIST;
     }
 
-    
-    @Override
-    public Object getRowKey(Fournisseur t) {
-        return t.getId();
-        }
-
-    public Fournisseur getRowData(String rowKey) {
-        
-        List<Fournisseur> ag = getFournisseurs();
-        for (Fournisseur entre : ag) {
-            if (entre.getId().equals(rowKey)) {
-                return entre;
-            }
-        }
-        return null;
-        }
     
     public void email(){
         

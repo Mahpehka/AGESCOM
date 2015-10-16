@@ -53,13 +53,11 @@
                     <p:selectOneMenu value="#{materielBean.materiel.type}" label="type"  filter="true" filterMatchMode="startsWith" panelStyle="width:220px">
                         <f:selectItems var="cust" value="#{materielBean.types}"    itemLabelEscaped="true" />
                     </p:selectOneMenu>
-                    <h:inputHidden id="number" value="#{materielBean.materiel.setId(id)}" />
+                    <h:inputHidden id="number" value="#{materielBean.materiel.id}" />
                     <p:commandButton value="Modifier" action="#{materielBean.updateMateriel()}"  oncomplete="PF('dl').hide()" update=":tableForm:table" />
                 </p:panelGrid>
             </h:form>
         </p:dialog>
-
-        <f:view>
 
 
             <h:form id='tableForm'>
@@ -90,9 +88,6 @@
                 <p:commandButton  onclick="PF('dl').show()" value="Modifier Materiels" update=":formModifier:panelGModifier"/>
 
             </h:form>
-
-
-        </f:view>
         
          <div id="footer">
             <ui:include src="footer.xhtml"/>
